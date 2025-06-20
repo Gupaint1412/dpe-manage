@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('sweetalert2/dist/sweetalert2.min.css') }}">
     <style>
         body {
             font-family: "Kanit", sans-serif;
@@ -25,7 +26,12 @@
   </head>
   <body>
     @yield('content')
+    <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>
+    @include('Event.auth_event')
+    @include('Event.notification_event')
     @stack('js')
   </body>
 </html>
