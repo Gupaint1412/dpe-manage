@@ -11,11 +11,13 @@
 
     <link rel="icon" href="{{ asset('tailadmin/build/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('jquery-ui/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('sweetalert2/dist/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome-6.7.2/css/all.min.css') }}">
     <style>
         body {
            .kanit-regular {
@@ -34,7 +36,8 @@
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
-    
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+    <script src="{{ asset('fontawesome-6.7.2/js/all.min.js') }}"></script>
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>
     
     @include('Event.auth_event')
