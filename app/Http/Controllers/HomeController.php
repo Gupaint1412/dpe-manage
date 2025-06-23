@@ -29,4 +29,9 @@ class HomeController extends Controller
     {
         return view('page.device');
     }
+
+    public function add_device()
+    {
+        return view('page.add_device');
+    }
 }
