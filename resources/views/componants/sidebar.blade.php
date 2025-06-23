@@ -123,7 +123,7 @@
               >
                 <li>
                   <a href="{{route('home')}}" class="menu-dropdown-item group {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} dark:text-gray-400">
-                    HOME
+                    หน้าหลัก
                   </a>
                 </li>
               </ul>
@@ -135,32 +135,13 @@
           <!-- Menu Item Calendar -->
           <li>
             <a
-              href="{{route('device')}}" class="menu-item group {{ request()->is('device') ? 'menu-item-active' : '' }}">
-              <i class="fa-solid fa-laptop {{ request()->is('device') ? 'menu-item-icon-active' : ''}} dark:text-gray-400" style="width: 24px;height:24px"></i>
-              {{-- <svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-800 dark:fill-white/90 {{ request()->is('device') ? 'menu-item-icon-active' : ''}}" width="24" height="24"  fill="none" viewBox="0 0 640 512">                          
-                <path d="M128 32C92.7 32 64 60.7 64 96l0 256 64 0 0-256 384 0 0 256 64 0 0-256c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2C0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8c0-10.6-8.6-19.2-19.2-19.2L19.2 384z"/>
-              </svg> --}}
-              {{-- <svg
-                :class="(selected === 'Add Device') && (page === 'device') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M384 96l0 224L64 320 64 96l320 0zM64 32C28.7 32 0 60.7 0 96L0 320c0 35.3 28.7 64 64 64l117.3 0-10.7 32L96 416c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-74.7 0-10.7-32L384 384c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L64 32zm464 0c-26.5 0-48 21.5-48 48l0 352c0 26.5 21.5 48 48 48l64 0c26.5 0 48-21.5 48-48l0-352c0-26.5-21.5-48-48-48l-64 0zm16 64l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm-16 80c0-8.8 7.2-16 16-16l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16zm32 160a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
-                  fill=""
-                />
-              </svg> --}}
-
+              href="{{route('device')}}" class="menu-item group {{ request()->is('device') ? 'menu-item-active' : '' }}  {{request()->is('add_device') ? 'menu-item-active' : ''}}">
+              <i class="fa-solid fa-laptop {{ request()->is('device') ? 'menu-item-icon-active' : ''}} {{request()->is('add_device') ? 'menu-item-active' : ''}} dark:text-gray-400" style="width: 24px;height:24px"></i>              
               <span
                 class="menu-item-text dark:text-gray-400"
                 :class="sidebarToggle ? 'lg:hidden' : ''"
               >
-                Add Device
+                 อุปกรณ์ทั้งหมด
               </span>
             </a>
           </li>
