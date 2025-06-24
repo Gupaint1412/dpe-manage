@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Typemodel;
 
 class HomeController extends Controller
 {
@@ -32,6 +33,7 @@ class HomeController extends Controller
 
     public function add_device()
     {
-        return view('page.add_device');
+        $types = Typemodel::all();
+        return view('page.add_device',compact('types'));
     }
 }
