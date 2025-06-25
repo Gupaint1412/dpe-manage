@@ -18,6 +18,7 @@
     <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome-6.7.2/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
     <style>
         body {
            .kanit-regular {
@@ -36,6 +37,7 @@
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
+    <script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
     <script src="{{ asset('fontawesome-6.7.2/js/all.min.js') }}"></script>
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>

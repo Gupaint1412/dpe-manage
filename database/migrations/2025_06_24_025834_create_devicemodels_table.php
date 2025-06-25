@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('devicemodels', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->string('type_eq');
             $table->string('brand');
             $table->string('model');
             $table->string('eq_number');
