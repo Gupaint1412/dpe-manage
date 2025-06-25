@@ -38,7 +38,7 @@
     <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
     <script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+    <script src="{{ asset('datatable/dataTables.min.js') }}"></script>
     <script src="{{ asset('fontawesome-6.7.2/js/all.min.js') }}"></script>
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>
     

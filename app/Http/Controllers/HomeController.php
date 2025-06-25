@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Typemodel;
+use App\Models\Devicemodel;
 
 class HomeController extends Controller
 {
@@ -28,12 +29,29 @@ class HomeController extends Controller
     }
     public function device()
     {
-        return view('page.device');
+        $device = Devicemodel::all();
+        return view('page.device',compact('device'));
     }
 
     public function add_device()
     {
         $types = Typemodel::all();
         return view('page.add_device',compact('types'));
+    }
+
+    public function store_device(Request $request){
+        Devicemodel::create([
+            'type' => $request->input('type'), // หรือ $request->name
+            'type_eq' => $request->input('subtype'),
+            'brand' => $request->input('brand'),
+            'model' => $request->input('model'),
+            'eq_no' => $request->input('eq_no'),
+            'eq_number' => $request->input('eq_number'),
+            'eq_number_it' => $request->input('eq_number_it'),
+            'service_life' => $request->input('service_life'),
+            'os' => $request->input('os'),
+            'path_img' => $request->input('path_img'),
+        ]);
+        return redirect()->route('device');
     }
 }

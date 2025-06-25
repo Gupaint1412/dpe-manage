@@ -333,11 +333,25 @@
                                 หมายเลข
                               </p>
                             </div>
-                          </th class="py-3">
+                          </th>
                           <th class="py-3">
                             <div class="flex items-center">
                               <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                 หมวดหมู่
+                              </p>
+                            </div>
+                          </th>
+                          <th class="py-3">
+                            <div class="flex items-center">
+                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                ประเภท
+                              </p>
+                            </div>
+                          </th>
+                          <th class="py-3">
+                            <div class="flex items-center">
+                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                อายุการใช้งาน
                               </p>
                             </div>
                           </th>
@@ -353,6 +367,7 @@
                       <!-- table header end -->
 
                       <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                      @foreach($device as $j)
                         <tr>
                           <td class="py-3">
                             <div class="flex items-center">
@@ -362,10 +377,10 @@
                                 </div>
                                 <div>
                                   <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                    HP-245-G9 14” No.8
+                                   {{$j->brand}}{{$j->model}} No.{{$j->eq_no}}
                                   </p>
                                   <span class="text-gray-500 text-theme-xs dark:text-gray-400">
-                                    เลขครุภัณฑ์: 01-67-7440-001-0001-00013                                   
+                                    เลขครุภัณฑ์: {{$j->eq_number}}                                   
                                   </span>
                                 </div>
                               </div>
@@ -374,14 +389,30 @@
                           <td class="py-3">
                             <div class="flex items-center">
                               <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                110-000-002-230
+                              {{$j->eq_number_it}}
                               </p>
                             </div>
                           </td>
                           <td class="py-3">
                             <div class="flex items-center">
                               <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                              Laptop
+                                {{$j->type}}
+                              </p>
+                            </div>
+                          </td>
+                          <td class="py-3">
+                            <div class="flex items-center">
+                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                @if($j->type_eq == "Notebook")
+                                <i class="fa-solid fa-laptop"></i>
+                                @endif
+                              </p>
+                            </div>
+                          </td>
+                          <td class="py-3">
+                            <div class="flex items-center">
+                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                              12 ปี
                               </p>
                             </div>
                           </td>
@@ -389,11 +420,12 @@
                             <div class="flex items-center">
                               <p
                                 class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">
-                                Delivered
+                                {{$j->status}}
                               </p>
                             </div>
                           </td>
-                        </tr>                       
+                        </tr> 
+                      @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -415,7 +447,7 @@
  var table = new DataTable('#myTable', {
   
     language: {
-        url: '//cdn.datatables.net/plug-ins/2.3.2/i18n/th.json',
+        url: '{{ asset('datatable/th.json') }}',
     },
 });
 </script>
