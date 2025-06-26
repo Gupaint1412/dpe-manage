@@ -27,6 +27,19 @@
             font-style: normal;
             }
         }
+         .align-center {
+        text-align: center;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+         .navigater:hover {    
+            color: oklch(0.623 0.214 259.815);
+            text-decoration-line: underline
+        }
+        .curser_hover:hover{
+            background-color: #f2f4f7;
+        }
     </style>
     @stack('css')
 </head>
@@ -37,6 +50,7 @@
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('datatable/dataTables.min.js') }}"></script>
     <script src="{{ asset('fontawesome-6.7.2/js/all.min.js') }}"></script>

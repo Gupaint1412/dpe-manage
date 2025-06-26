@@ -30,7 +30,10 @@ class HomeController extends Controller
     public function device()
     {
         $device = Devicemodel::all();
-        return view('page.device',compact('device'));
+        
+        $currentYear = date('Y')+543;
+        // dd($currentYear);
+        return view('page.device',compact('device', 'currentYear'));
     }
 
     public function add_device()
@@ -53,5 +56,10 @@ class HomeController extends Controller
             'path_img' => $request->input('path_img'),
         ]);
         return redirect()->route('device');
+    }
+
+    public function borrow_eq()
+    {
+        return view('page.borrow_eq');
     }
 }

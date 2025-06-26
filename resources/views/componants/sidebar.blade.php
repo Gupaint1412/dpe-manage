@@ -1,3 +1,4 @@
+
 <aside
   :class="sidebarToggle ? 'translate-x-0 lg:w-[90px]' : '-translate-x-full'"
   class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 duration-300 ease-linear dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0"
@@ -122,7 +123,7 @@
                 class="menu-dropdown mt-2 flex flex-col gap-1 pl-9"
               >
                 <li>
-                  <a href="{{route('home')}}" class="menu-dropdown-item group {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} dark:text-gray-400">
+                  <a href="{{route('home')}}" class="menu-dropdown-item group curser_hover {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} dark:text-gray-400">
                     หน้าหลัก
                   </a>
                 </li>
@@ -135,8 +136,8 @@
           <!-- Menu Item Calendar -->
           <li>
             <a
-              href="{{route('device')}}" class="menu-item group {{ request()->is('device') ? 'menu-item-active' : '' }}  {{request()->is('add_device') ? 'menu-item-active' : ''}}">
-              <i class="fa-solid fa-laptop {{ request()->is('device') ? 'menu-item-icon-active' : ''}} {{request()->is('add_device') ? 'menu-item-active' : ''}} dark:text-gray-400" style="width: 24px;height:24px"></i>              
+              href="{{route('device')}}" class="menu-item group curser_hover {{ request()->is('device') ? 'menu-item-active' : '' }}  {{request()->is('add_device') ? 'menu-item-active' : ''}}">
+              <i class="fa-solid fa-laptop  {{ request()->is('device') ? 'menu-item-icon-active' : ''}} {{request()->is('add_device') ? 'menu-item-active' : ''}} dark:text-gray-400" style="width: 24px;height:24px"></i>              
               <span
                 class="menu-item-text dark:text-gray-400"
                 :class="sidebarToggle ? 'lg:hidden' : ''"
@@ -146,12 +147,26 @@
             </a>
           </li>
           <!-- Menu Item Calendar -->
+           <!-- Menu Item Calendar -->
+          <li>
+            <a
+              href="{{route('borrow_eq')}}" class="menu-item group curser_hover {{ request()->is('borrow_eq') ? 'menu-item-active' : '' }}">
+              <i class="fa-regular fa-file-lines {{ request()->is('borrow_eq') ? 'menu-item-icon-active' : ''}}  dark:text-gray-400" style="width: 24px;height:24px"></i>              
+              <span
+                class="menu-item-text dark:text-gray-400"
+                :class="sidebarToggle ? 'lg:hidden' : ''"
+              >
+                 ข้อมูลการยืมอุปกรณ์
+              </span>
+            </a>
+          </li>
+          <!-- Menu Item Calendar -->
           <!-- Menu Item Calendar -->
           <li>
             <a
               href="calendar.html"
               @click="selected = (selected === 'Calendar' ? '':'Calendar')"
-              class="menu-item group "
+              class="menu-item group curser_hover" "
               :class=" (selected === 'Calendar') && (page === 'calendar') ? 'menu-item-active' : 'menu-item-inactive'"
             >
               <svg

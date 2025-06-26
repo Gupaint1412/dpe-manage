@@ -12,3 +12,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/device', [HomeController::class, 'device'])->name('device');
 Route::get('/add_device',[HomeController::class,'add_device'])->name('add_device');
 Route::post('/store_device',[HomeController::class,'store_device'])->name('store_device');
+Route::get('/borrow_eq',[HomeController::class,'borrow_eq'])->name('borrow_eq');

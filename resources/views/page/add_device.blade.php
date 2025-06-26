@@ -8,6 +8,10 @@
     .justify-center {
         justify-content: center;
     }
+    .navigater:hover {    
+    color: oklch(0.623 0.214 259.815);
+    text-decoration-line: underline
+  }
 </style>
 @endpush
 
@@ -27,7 +31,7 @@
         <main>              
           <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6"> 
             <div class="mb-6 flex items-center ">
-              <a href="{{route('device')}}"><u><h5 class=" dark:text-white/90">อุปกรณ์ทั้งหมด</h5></u></a>&nbsp; > &nbsp;<h5 class="dark:text-white/90">เพิ่มอุปกรณ์</h5>
+               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<a  class="navigater" href="{{route('device')}}"><h5 class=" dark:text-white/90">อุปกรณ์ทั้งหมด</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">เพิ่มอุปกรณ์</h5></u>
             </div>
             <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
                 <div class="px-5 py-4 sm:px-6 sm:py-5">

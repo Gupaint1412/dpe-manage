@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('eq_number_it');
             $table->integer('service_life');
             $table->string('os');
-            $table->string('accessories');
-            $table->string('status');
-            $table->integer('deleted');
+            $table->string('accessories')->nullable();
+            $table->string('path_img')->nullable();
+            $table->string('status')->default(0);
+            $table->integer('deleted')->default(0);
             $table->timestamps();
         });
     }
