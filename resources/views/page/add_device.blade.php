@@ -106,7 +106,7 @@
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 เลขครุภัณฑ์
                             </label>
-                            <input type="text" name="eq_number" placeholder="เช่น 10677440001000100013" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="eq_number" placeholder="เช่น 10-67-7440-001-0001-00013" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">

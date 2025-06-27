@@ -2522,6 +2522,7 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  
   .sm\:flex-row {
     @media (width >= 640px) {
       -webkit-box-orient: horizontal;
@@ -2803,6 +2804,11 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .lg\:grid-cols-2 {
     @media (width >= 1024px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .lg\:d-none {
+    @media (width <= 1024px) {
+      display: none;
     }
   }
   .lg\:flex-row {

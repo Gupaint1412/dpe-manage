@@ -12,6 +12,21 @@
     color: oklch(0.623 0.214 259.815);
     text-decoration-line: underline
   }
+  .bg-computer {
+    background: #6A057F;
+  }  
+  .bg-projector {
+    background: #4A47A3;
+  }  
+  .bg-network { 
+    background: #8D93ED;
+  }
+  .d-none{
+    display: none;
+  }
+  [x-cloak] {
+  display: none !important;
+}
 </style>
 @endpush
 
@@ -64,7 +79,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Computer</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        2  เครื่อง
+                        {{$computer}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -72,10 +87,10 @@
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl " style="background: #6A057F">
                           <i class="fa-solid fa-laptop" style="width:24px;height:24px;color:#ffffff"></i>                        
                         </div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Laptops</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Notebook</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        2  เครื่อง
+                        {{$notebook}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -86,7 +101,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Tablet</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        2  เครื่อง
+                        {{$tablet}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -136,7 +151,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Projectors</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        12  เครื่อง
+                        {{$projector}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -147,7 +162,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Printer&Sacnner</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        12  เครื่อง
+                        {{$printer}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -158,7 +173,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Network</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        12  เครื่อง
+                        {{$network}}  เครื่อง
                       </span>
                     </div>
                     
@@ -188,7 +203,7 @@
                   <div class="w-full overflow-x-auto">
                     <table class="min-w-full" id="myTable">
                       <!-- table header start -->
-                      <thead>
+                      <thead >
                         <tr class="border-gray-100 border-y dark:border-gray-800">
                           <th class="py-3">
                             <div class="flex items-center">
@@ -196,15 +211,7 @@
                                 รายการ
                               </p>
                             </div>
-                          </th>
-                          
-                          <th class="py-3">
-                            <div class="flex items-center">
-                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                หมวดหมู่
-                              </p>
-                            </div>
-                          </th>
+                          </th>                                            
                           <th class="py-3">
                             <div class="flex items-center">
                               <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
@@ -226,6 +233,13 @@
                               </p>
                             </div>
                           </th>
+                          <th class="py-3">
+                            <div class="flex items-center col-span-2">
+                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                 Action
+                              </p>
+                            </div>
+                          </th>
                         </tr>
                       </thead>
                       <!-- table header end -->
@@ -237,11 +251,17 @@
                             <div class="flex items-center">
                               <div class="flex items-center gap-3">
                                 <div class="h-[50px] w-[50px] overflow-hidden rounded-md">
-                                  <img src="{{asset('tailadmin/src/images/product/HP-245-14-inch-G9.png')}}" alt="Product" />
+                                  @if($j->model == "245-G9")
+                                    <img src="{{asset('Device_model/HP-245-G9.png')}}" alt="Product" />
+                                  @elseif($j->model == "348-G3") 
+                                    <img src="{{asset('Device_model/HP-348-G3.png')}}" alt="Product" />                                 
+                                   @elseif($j->model == "Vostro 14 3000 Series") 
+                                    <img src="{{asset('Device_model/Dell-Vostro14-3000-Series.png')}}" alt="Product" />
+                                  @endif
                                 </div>
                                 <div>
                                   <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                   {{$j->brand}}{{$j->model}} No.{{$j->eq_no}}
+                                   {{$j->brand}}-{{$j->model}} No.{{$j->eq_no}}
                                   </p>
                                   <span class="text-gray-500 text-theme-xs dark:text-gray-400">
                                     เลขครุภัณฑ์: {{$j->eq_number}}                                   
@@ -250,20 +270,16 @@
                               </div>
                             </div>
                           </td>                          
+                          
                           <td class="py-3">
                             <div class="flex items-center">
-                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                {{$j->type}}
-                              </p>
-                            </div>
-                          </td>
-                          <td class="py-3">
-                            <div class="flex items-center">
-                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                @if($j->type_eq == "Notebook")
-                                <i class="fa-solid fa-laptop"></i>&nbsp; {{$j->type_eq}}
-                                @endif
-                              </p>
+                              {{-- <p class="text-gray-500 text-theme-sm dark:text-gray-400">                                 --}}
+                                  @if($j->type == "อุปกรณ์ทำงานสารสนเทศ" && $j->type_eq == "Notebook")
+                                    <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">
+                                      <span><i class="fa-solid fa-laptop text-white/90"></i></span><span class="lg:d-none"style="padding-left:.25rem">{{$j->type_eq}}</span>
+                                    </p>
+                                  @endif
+                              {{-- </p> --}}
                             </div>
                           </td>
                           <td class="py-3">
@@ -298,6 +314,56 @@
                               @endif
                             </div>
                           </td>
+                          <td class="py-3">
+                            <div x-data="{isModalOpen: false}">
+                                {{-- ปุ่มเปิด Modal --}}
+                               <button class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600" @click="isModalOpen = !isModalOpen">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                              </button>
+                                {{-- Modal --}}
+                                <div x-show="isModalOpen"class="fixed inset-0 flex items-center justify-center p-5 overflow-y-auto modal z-99999">
+                                    <div class="modal-close-btn fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"></div>
+                                    <div @click.outside="isModalOpen = false" class="relative w-full max-w-[600px] rounded-3xl bg-white p-6 dark:bg-gray-900 lg:p-10">
+                                        {{-- close btn --}}
+                                        <button @click="isModalOpen = false" class="absolute right-3 top-3 z-999 flex h-9.5 w-9.5 items-center justify-center rounded-full bg-gray-100 text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white sm:right-6 sm:top-6 sm:h-11 sm:w-11">
+                                            <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04289 16.5413C5.65237 16.9318 5.65237 17.565 6.04289 17.9555C6.43342 18.346 7.06658 18.346 7.45711 17.9555L11.9987 13.4139L16.5408 17.956C16.9313 18.3466 17.5645 18.3466 17.955 17.956C18.3455 17.5655 18.3455 16.9323 17.955 16.5418L13.4129 11.9997L17.955 7.4576C18.3455 7.06707 18.3455 6.43391 17.955 6.04338C17.5645 5.65286 16.9313 5.65286 16.5408 6.04338L11.9987 10.5855L7.45711 6.0439C7.06658 5.65338 6.43342 5.65338 6.04289 6.0439C5.65237 6.43442 5.65237 7.06759 6.04289 7.45811L10.5845 11.9997L6.04289 16.5413Z" fill=""></path>
+                                            </svg>
+                                        </button>
+                                        
+                                        <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"> 
+                                            <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+                                                <div class="col-span-12 space-y-6 xl:col-span-12">
+                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">                                                   
+                                                      <div class="mb-5 overflow-hidden rounded-lg">
+                                                        <img src="{{asset('All_Device/247292.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
+                                                      </div>
+                                                      <div class="mb-5 overflow-hidden rounded-lg">
+                                                        <img src="{{asset('All_Device/247293.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
+                                                      </div>
+                                                      <div class="mb-5 overflow-hidden rounded-lg">
+                                                        <img src="{{asset('All_Device/247294.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
+                                                      </div>                                                  
+                                                  </div>                                                   
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
+                                                    {{$j->brand}}-{{$j->model}} No.{{$j->eq_no}}
+                                                </h4>
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+                                                    architecto aspernatur cum et ipsum
+                                                </p>
+                                                <a href="#" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
+                                                    Read more
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </td>
                         </tr> 
                       @endforeach
                       </tbody>
@@ -324,7 +390,6 @@
         url: '{{ asset('datatable/th.json') }}',
     },
 });
-
 document.addEventListener('DOMContentLoaded', function () {
             var ctx = document.getElementById('myChart').getContext('2d');
             var myDoughnutChart = new Chart(ctx, {
@@ -356,5 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+    
 </script>
+
 @endpush

@@ -30,10 +30,14 @@ class HomeController extends Controller
     public function device()
     {
         $device = Devicemodel::all();
-        
-        $currentYear = date('Y')+543;
-        // dd($currentYear);
-        return view('page.device',compact('device', 'currentYear'));
+        $computer = Devicemodel::where('type_eq', 'Computer')->count();
+        $notebook = Devicemodel::where('type_eq', 'Notebook')->count();
+        $tablet = Devicemodel::where('type_eq', 'Tablet')->count();
+        $projector = Devicemodel::where('type_eq', 'Projector')->count();
+        $printer = Devicemodel::where('type_eq', 'Printer')->count();        
+        $network = Devicemodel::where('type_eq', 'Network')->count();   
+        $currentYear = date('Y')+543;       
+        return view('page.device',compact('device', 'currentYear','notebook','computer','tablet','projector','printer','network'));
     }
 
     public function add_device()

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome-6.7.2/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+    
     <style>
         body {
            .kanit-regular {
@@ -47,7 +48,8 @@
     x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))":class="{'dark bg-gray-900': darkMode === true}">
     @yield('content')
-    <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('jquery/jquery.min.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -57,7 +59,7 @@
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>
     
     @include('Event.auth_event')
-    @include('Event.notification_event')
+    @include('Event.notification_event')    
     @stack('js')
 </body>
 </html>
