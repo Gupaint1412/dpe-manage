@@ -31,17 +31,18 @@
         <main>              
           <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6"> 
             <div class="mb-6 flex items-center ">
-               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<a  class="navigater" href="{{route('device')}}"><h5 class=" dark:text-white/90">อุปกรณ์ทั้งหมด</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">เพิ่มอุปกรณ์</h5></u>
+               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<a  class="navigater" href="{{route('device')}}"><h5 class=" dark:text-white/90">อุปกรณ์ทั้งหมด</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">แก้ไขอุปกรณ์</h5></u>
             </div>
             <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
                 <div class="px-5 py-4 sm:px-6 sm:py-5">
                     <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
-                        เพิ่มข้อมูลอุปกรณ์
+                        แก้ไขข้อมูลอุปกรณ์
                     </h3>
                 </div>
             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
-                <form class="w-full" method="POST" action="{{ route('store_device') }}"  enctype="multipart/form-data">  
-                    @csrf           
+                <form class="w-full" method="POST" action="{{ route('update_device', $device->id) }}"  enctype="multipart/form-data">  
+                    @csrf  
+                     @method('PUT')         
                     <div class=" flex flex-wrap -mx-2.5 gap-y-8" >
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -49,8 +50,8 @@
                             </label>
                             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                                 <select name="type" class=" dark:bg-dark-900 z-20 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" :class="isOptionSelected &amp;&amp; 'text-gray-500 dark:text-gray-400'" @change="isOptionSelected = true">
-                                    <option value="" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400" disabled selected>
-                                        โปรดเลือกกลุ่มอุปกรณ์
+                                    <option value="{{ $device->type }}" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400"  selected>
+                                        {{$device->type ?? 'โปรดเลือกประเภทกลุ่มอุปกรณ์'}}
                                     </option>
                                     @foreach ($types as $type)
                                         <option value="{{$type->type_eq}}" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400">
@@ -71,8 +72,8 @@
                             </label>
                             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                                 <select name="subtype" class="dark:bg-dark-900 z-20 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" :class="isOptionSelected &amp;&amp; 'text-gray-500 dark:text-gray-400'" @change="isOptionSelected = true">
-                                    <option value="" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400" disabled selected>
-                                        โปรดเลือกชนิดอุปกรณ์
+                                    <option value="{{$device->type_eq}}" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400"  selected>
+                                        {{$device->type_eq }}
                                     </option>
                                 </select>
                                 <span class="absolute z-30 text-gray-500 -translate-y-1/2 right-4 top-1/2 dark:text-gray-400">
@@ -86,13 +87,13 @@
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 ยี่ห้อ
                             </label>
-                            <input type="text" name="brand" placeholder="เช่น Acer" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="brand" value="{{$device->brand}}" placeholder="เช่น Acer" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 รุ่น
                             </label>
-                            <input type="text" name="model" placeholder="เช่น Nitro 5" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="model" value="{{$device->model}}" placeholder="เช่น Nitro 5" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                     </div>   
                     <div class=" flex flex-wrap -mx-2.5 gap-y-8" >  
@@ -100,19 +101,19 @@
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 เลขเครื่อง
                             </label>
-                            <input type="text" name="eq_no" placeholder="เช่น 8" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="eq_no" value="{{$device->eq_no}}" placeholder="เช่น 8" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>                      
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 เลขครุภัณฑ์
                             </label>
-                            <input type="text" name="eq_number" placeholder="เช่น 10-67-7440-001-0001-00013" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="eq_number" value="{{$device->eq_number}}" placeholder="เช่น 10-67-7440-001-0001-00013" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 เลขคุมครุภัณฑ์
                             </label>
-                            <input type="text" name="eq_number_it" placeholder="เช่น 110000002230" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="eq_number_it" value="{{$device->eq_number_it}}" placeholder="เช่น 110000002230" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                     </div>
                     
@@ -121,7 +122,7 @@
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                 ปีที่ซื้อ (ปี พ.ศ.)
                             </label>
-                            <input type="text" name="service_life" maxlength="4" placeholder="เช่น 2567" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                            <input type="text" name="service_life" value="{{$device->service_life}}" maxlength="4" placeholder="เช่น 2567" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                         </div>
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2.5 py-2.5">
                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
@@ -129,8 +130,8 @@
                             </label>
                             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                                 <select name="os" class="dark:bg-dark-900 z-20 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" :class="isOptionSelected &amp;&amp; 'text-gray-500 dark:text-gray-400'" @change="isOptionSelected = true">
-                                    <option value="" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400" disabled selected>
-                                        โปรดเลือกระบบปฏิบัติการ
+                                    <option value="{{$device->os}}" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400"  selected>
+                                        {{$device->os}}
                                     </option>
                                    <option value="Windows 10">Windows 10</option>
                                    <option value="Windows 11">Windows 11</option>
@@ -146,11 +147,13 @@
                             </div>
                         </div>
                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2.5 py-2.5">
-                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                                ภาพถ่ายอุปกรณ์
+                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400" style="display: flex; align-items: center;">
+                                ภาพถ่ายอุปกรณ์       
+                                <div style="display:flex;padding-left:.5rem" ><input type="checkbox" name="is_required" value="0" class="ml-2 text-brand-500 focus:ring-brand-500 dark:focus:ring-brand-800" >&nbsp;&nbsp;เปลี่ยนแปลงไฟล์รูปภาพ</div>
                             </label>
                             {{-- <input name="path_img"  multiple type="file" accept="image/*" class="focus:border-ring-brand-300 shadow-theme-xs focus:file:ring-brand-300 h-11 w-full overflow-hidden rounded-lg border border-gray-300 bg-transparent text-sm text-gray-500 transition-colors file:mr-5 file:border-collapse file:cursor-pointer file:rounded-l-lg file:border-0 file:border-r file:border-solid file:border-gray-200 file:bg-gray-50 file:py-3 file:pr-3 file:pl-3.5 file:text-sm file:text-gray-700 placeholder:text-gray-400 hover:file:bg-gray-100 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:text-white/90 dark:file:border-gray-800 dark:file:bg-white/[0.03] dark:file:text-gray-400 dark:placeholder:text-gray-400"/> --}}
-                            <input name="images[]" multiple type="file" accept="image/*" class="focus:border-ring-brand-300 shadow-theme-xs focus:file:ring-brand-300 h-11 w-full overflow-hidden rounded-lg border border-gray-300 bg-transparent text-sm text-gray-500 transition-colors file:mr-5 file:border-collapse file:cursor-pointer file:rounded-l-lg file:border-0 file:border-r file:border-solid file:border-gray-200 file:bg-gray-50 file:py-3 file:pr-3 file:pl-3.5 file:text-sm file:text-gray-700 placeholder:text-gray-400 hover:file:bg-gray-100 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:text-white/90 dark:file:border-gray-800 dark:file:bg-white/[0.03] dark:file:text-gray-400 dark:placeholder:text-gray-400"/>
+                            
+                            <input name="images[]" multiple type="file" accept="image/*" disabled class="focus:border-ring-brand-300 shadow-theme-xs focus:file:ring-brand-300 h-11 w-full overflow-hidden rounded-lg border border-gray-300 bg-transparent text-sm text-gray-500 transition-colors file:mr-5 file:border-collapse file:cursor-pointer file:rounded-l-lg file:border-0 file:border-r file:border-solid file:border-gray-200 file:bg-gray-50 file:py-3 file:pr-3 file:pl-3.5 file:text-sm file:text-gray-700 placeholder:text-gray-400 hover:file:bg-gray-100 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:text-white/90 dark:file:border-gray-800 dark:file:bg-white/[0.03] dark:file:text-gray-400 dark:placeholder:text-gray-400"/>                            
                         </div>
                     </div>
                     
@@ -177,78 +180,62 @@
 
 @push('js')
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
     const TypeGroup = {
         "อุปกรณ์ทำงานสารสนเทศ": ["Computer", "Notebook", "Tablet", "Mobile Phone", "Printer"],
         "อุปกรณ์นำเสนอ": ["Projector", "HDMI", "Speaker", "Microphone", "Webcam"],
         "อุปกรณ์เครือข่าย": ["Switch", "Router", "Access Point"],
     };
 
+    // เลือก element ของ select ทั้งสอง
     const TypeSelect = document.querySelector('select[name="type"]');
     const SubTypeSelect = document.querySelector('select[name="subtype"]');
 
-    // เก็บค่า subtype เดิมจากฐานข้อมูล (ถ้ามี)
-    const initialSubType = "{{ $device->type_eq ?? '' }}"; // ใช้ค่าจาก $device
-
+    // ฟังก์ชันสำหรับอัปเดตตัวเลือกใน SubTypeSelect
     function updateSubTypeOptions() {
-        const selectedType = TypeSelect.value;
-        SubTypeSelect.innerHTML = ''; // เคลียร์ options เดิมทั้งหมด
+        const selectedType = TypeSelect.value; // ค่า type ที่ถูกเลือก
+        // SubTypeSelect.innerHTML = '<option value="" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400" disabled selected>โปรดเลือกชนิดอุปกรณ์</option>'; // ล้าง option เดิม
 
-        // เพิ่ม option default หรือ option ของค่าปัจจุบัน (ถ้ายังไม่มี)
-        let defaultOptionAdded = false;
-        if (!selectedType) { // ถ้าไม่มี type ถูกเลือก
-            const defaultOption = document.createElement('option');
-            defaultOption.value = "";
-            defaultOption.textContent = "โปรดเลือกชนิดอุปกรณ์";
-            defaultOption.classList.add('text-gray-500', 'dark:bg-gray-900', 'dark:text-gray-400');
-            defaultOption.selected = true;
-            defaultOption.disabled = true;
-            SubTypeSelect.appendChild(defaultOption);
-            defaultOptionAdded = true;
-        }
-
+        // ถ้ามีการเลือก type ให้เพิ่ม option subtype ใหม่
         if (selectedType && TypeGroup[selectedType]) {
             TypeGroup[selectedType].forEach(subtype => {
                 const option = document.createElement('option');
                 option.value = subtype;
                 option.textContent = subtype;
-                option.classList.add('text-gray-500', 'dark:bg-gray-900', 'dark:text-gray-400');
-                // ตั้งค่า selected ถ้าค่าตรงกับ initialSubType
-                if (subtype === initialSubType) {
-                    option.selected = true;
-                }
+                option.classList.add('text-gray-500', 'dark:bg-gray-900', 'dark:text-gray-400'); // เพิ่ม class ให้ option
                 SubTypeSelect.appendChild(option);
             });
         }
-        // ถ้า initialSubType ไม่ตรงกับรายการที่สร้างขึ้นมา (เช่น เมื่อ type ถูกเปลี่ยน)
-        // หรือไม่มีค่า initialSubType ให้ตั้งค่า selected option แรกเป็นอันที่ถูกเลือกโดย TypeGroup
-        if (!defaultOptionAdded && !SubTypeSelect.querySelector('option[selected]')) {
-             if (SubTypeSelect.options.length > 0) {
-                 SubTypeSelect.options[0].selected = true;
-             }
-        }
     }
 
+    // เพิ่ม event listener เมื่อมีการเปลี่ยนแปลงการเลือก type
     TypeSelect.addEventListener('change', updateSubTypeOptions);
 
-    // เรียกใช้งานฟังก์ชันครั้งแรกเมื่อหน้าโหลด
+    // เรียกใช้งานฟังก์ชันครั้งแรกเผื่อในกรณีที่มีค่าเริ่มต้นถูกเลือกไว้
     updateSubTypeOptions();
 
-    // ส่วนของ Javascript สำหรับ checkbox และ file input (เหมือนเดิม)
+    document.addEventListener('DOMContentLoaded', function() {
+    // เลือก checkbox และ input file ที่ต้องการ
     const checkbox = document.querySelector('input[name="is_required"]');
     const fileInput = document.querySelector('input[name="images[]"]');
 
-    // ตั้งค่า disabled ตามค่าเริ่มต้น (ควรเป็น true)
-    fileInput.disabled = true;
+    // ตรวจสอบสถานะเริ่มต้นของ checkbox เพื่อตั้งค่า disabled ให้ input file
+    // โดย default ให้ input file เริ่มต้นด้วยสถานะ disabled
+    fileInput.disabled = true; 
 
+    // เพิ่ม Event Listener เมื่อ checkbox มีการเปลี่ยนแปลง
     checkbox.addEventListener('change', function() {
         if (this.checked) {
-            fileInput.disabled = false;
+            // ถ้า checkbox ถูกติ๊ก (checked)
+            fileInput.disabled = false; // เอา disabled ออก ทำให้ input file ใช้งานได้
+            checkbox.value = '1'; // ตั้งค่า value ของ checkbox เป็น 1
         } else {
-            fileInput.disabled = true;
-            fileInput.value = '';
+            // ถ้า checkbox ไม่ถูกติ๊ก (unchecked)
+            fileInput.disabled = true;  // เพิ่ม disabled กลับเข้าไป ทำให้ input file ใช้งานไม่ได้
+            fileInput.value = '';       // เคลียร์ไฟล์ที่เลือกไว้ (ถ้ามี)
+            checkbox.value = '0'; // ตั้งค่า value ของ checkbox เป็น 0
         }
     });
 });
+    
 </script>
 @endpush

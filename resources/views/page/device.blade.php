@@ -257,6 +257,14 @@
                                     <img src="{{asset('Device_model/HP-348-G3.png')}}" alt="Product" />                                 
                                    @elseif($j->model == "Vostro 14 3000 Series") 
                                     <img src="{{asset('Device_model/Dell-Vostro14-3000-Series.png')}}" alt="Product" />
+                                      @else
+                                  {{-- ถ้าไม่มีรูปภาพโมเดลเฉพาะ ให้แสดงรูปภาพแรกจาก path_img ถ้ามี --}}
+                                  @if($j->path_img && is_array($j->path_img) && count($j->path_img) > 0)
+                                      <img src="{{asset($j->path_img[0])}}" alt="Device Image" class="w-full h-full object-cover"/>
+                                  @else
+                                      {{-- รูปภาพ placeholder ถ้าไม่มีทั้งรูปโมเดลเฉพาะและรูปที่อัปโหลด --}}
+                                      <img src="https://placehold.co/50x50/cccccc/333333?text=No+Image" alt="No Image" />
+                                  @endif
                                   @endif
                                 </div>
                                 <div>
@@ -334,16 +342,19 @@
                                         <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"> 
                                             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
                                                 <div class="col-span-12 space-y-6 xl:col-span-12">
-                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">                                                   
-                                                      <div class="mb-5 overflow-hidden rounded-lg">
-                                                        <img src="{{asset('All_Device/247292.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
-                                                      </div>
-                                                      <div class="mb-5 overflow-hidden rounded-lg">
-                                                        <img src="{{asset('All_Device/247293.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
-                                                      </div>
-                                                      <div class="mb-5 overflow-hidden rounded-lg">
-                                                        <img src="{{asset('All_Device/247294.jpg')}}" style="max-height: 250px; width: auto;" alt="Device Image 1" class="rounded-lg">
-                                                      </div>                                                  
+                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+
+                                                     @if($j->path_img && is_array($j->path_img) && count($j->path_img) > 0)
+                                                        @foreach($j->path_img as $imagePath)
+                                                            <div class="mb-5 overflow-hidden rounded-lg">
+                                                                <img src="{{ asset($imagePath) }}" style="max-height: 250px; width: auto;" alt="Device Image" class="rounded-lg object-cover">
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
+                                                            ไม่มีรูปภาพสำหรับอุปกรณ์นี้
+                                                        </div>
+                                                    @endif                                                 
                                                   </div>                                                   
                                                 </div>
                                             </div>
@@ -355,7 +366,7 @@
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
                                                     architecto aspernatur cum et ipsum
                                                 </p>
-                                                <a href="#" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
+                                                <a href="{{route('edit_device',$j->id)}}" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
                                                     Read more
                                                 </a>
                                             </div>
