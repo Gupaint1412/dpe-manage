@@ -161,7 +161,7 @@ class HomeController extends Controller
         // 6. จัดการการอัปโหลดรูปภาพใหม่ (ถ้าผู้ใช้เลือกที่จะเปลี่ยนรูปภาพ)
         if ($request->has('is_required') && $request->input('is_required') == '1' && $request->hasFile('images')) {
             $imagePaths = [];
-
+            
             // ลบรูปภาพเก่าออกก่อน
             if ($device->path_img) {
                 // path_img ควรเก็บเป็น JSON array ของ path รูปภาพ
@@ -175,16 +175,18 @@ class HomeController extends Controller
                     }
                 }
             }
-
+            $destinationPath = 'All_Device';
             // อัปโหลดรูปภาพใหม่
             foreach ($request->file('images') as $image) {
                 $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('All_Device'), $imageName);
-                $imagePaths[] = 'All_Device/' . $imageName;
+
+                $image->move(public_path($destinationPath), $imageName);
+
+                $imagePaths[] = $destinationPath.'/'. $imageName;
             }
 
             // เพิ่ม path รูปภาพใหม่เข้าไปในข้อมูลอัปเดต
-            $updateData['path_img'] = json_encode(array_values(array_unique($imagePaths)));
+            $updateData['path_img'] = $imagePaths;
         }
         // ถ้า is_required ไม่ได้ถูกติ๊ก หรือไม่มีไฟล์ภาพใหม่ส่งมา และเดิมมีภาพอยู่แล้ว
         // เราจะไม่ไปยุ่งกับ path_img เพื่อคงภาพเดิมไว้
