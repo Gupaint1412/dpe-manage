@@ -289,7 +289,7 @@
                                 </div>
                                 <div>
                                   <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                   {{$j->brand}}-{{$j->model}} No.{{$j->eq_no}}
+                                   {{$j->brand}}-{{$j->model}} หมายเลข &nbsp;{{$j->eq_no}}
                                   </p>
                                   <span class="text-gray-500 text-theme-xs dark:text-gray-400">
                                     เลขครุภัณฑ์: {{$j->eq_number}}                                   
@@ -360,7 +360,15 @@
                                         </button>
                                         
                                         <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"> 
-                                            <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+                                          <div class="d-flex align-items-center" style="padding-bottom: 0.8rem;justify-content:space-between">
+                                            <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90" style="margin: 0;">
+                                                    {{$j->brand}} รุ่น {{$j->model}} หมายเลข &nbsp;{{$j->eq_no}}
+                                            </h4>
+                                            <a href="{{route('edit_device',$j->id)}}" style="margin-right: 4rem" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-3 py-2 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
+                                              แก้ไขข้อมูล
+                                            </a>
+                                          </div>
+                                            <div class="grid grid-cols-12 gap-4 md:gap-6 ">
                                                 <div class="col-span-12 space-y-6 xl:col-span-12">
                                                   <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
                                                     
@@ -370,7 +378,7 @@
                                                           @foreach($j->path_img as $imagePath)
                                                           <div class="swiper-slide">
                                                               {{-- <div class="mb-5 overflow-hidden rounded-lg"> --}}
-                                                                  <img  src="{{ asset($imagePath) }}" style="max-height:30vw" alt="Device Image" class="rounded-lg object-cover">
+                                                                  <img  src="{{ asset($imagePath) }}" style="max-height:23vw" alt="Device Image" class="rounded-lg object-cover">
                                                               {{-- </div> --}}
                                                           </div>
                                                           @endforeach
@@ -388,16 +396,32 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
-                                                    {{$j->brand}}-{{$j->model}} No.{{$j->eq_no}}
-                                                </h4>
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-                                                    architecto aspernatur cum et ipsum
-                                                </p>
-                                                <a href="{{route('edit_device',$j->id)}}" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
-                                                    Read more
-                                                </a>
+                                              <div class="grid grid-cols-12 gap-4 md:gap-6 ">
+                                                 <div class="col-span-12 space-y-6 xl:col-span-12">
+                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                                                    <div class="mb-5 overflow-hidden rounded-lg">
+                                                      <div class="d-flex px-5" style="justify-content:space-between;">
+                                                        <h6 style="margin: 0">หมวดหมู่ : {{$j->type}}</h6>
+                                                        <h6 style="margin: 0">ประเภท : {{$j->type_eq}}</h6>
+                                                      </div>
+                                                      <div class="d-flex px-5" style="justify-content: space-between">
+                                                        <h6 style="margin: 0">เลขครุภัณฑ์ : {{$j->eq_number}}</h6>
+                                                        <h6 style="margin: 0">อายุการใช้งาน : {{$currentYear - $j->service_life}} ปี</h6>
+                                                      </div>
+                                                    </div>
+                                                    <div class="mb-5 overflow-hidden rounded-lg">
+                                                      <div class="d-flex px-5" style="justify-content: space-between">
+                                                        <h6 style="margin: 0">รุ่น : {{$j->brand}}-{{$j->model}}</h6>
+                                                        <h6 style="margin: 0">หมายเลขเครื่อง : {{$j->eq_no}}</h6>
+                                                      </div>
+                                                      <div class="d-flex px-5" style="justify-content: space-between">
+                                                        <h6 style="margin: 0">ระบบปฏิบัติการ : {{$j->os}}</h6>
+                                                        <h6 style="margin: 0">สถานะ : {{$j->status}}</h6>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
                                     </div>
@@ -467,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // ตัวเลือกหลักๆ
                 slidesPerView: 1, // แสดงทีละ 1 รูป
                 spaceBetween: 30, // ระยะห่างระหว่างสไลด์ (ถ้ามีหลายรูปต่อหน้า)
-                loop: true, // วนลูปเมื่อถึงรูปสุดท้าย
+                loop: false, // วนลูปเมื่อถึงรูปสุดท้าย
 
                 // เพิ่ม pagination (แถบจุดด้านล่าง)
                 pagination: {
