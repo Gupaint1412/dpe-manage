@@ -53,6 +53,22 @@ $(document).ready(function(){
         footer: '<a href="#">ติดต่อ-สอบถามเจ้าหน้าที่กลุ่มเทคโนโลยีสารสนเทศ</a>'
         });
     @endif
+    @if(Session::has('storage-success'))
+    Swal.fire({
+        icon: "success",
+        title: "บันทึกข้อมูลสำเร็จ",        
+        showConfirmButton: false,
+        timer: 1500
+        });
+    @endif
+    @if(Session::has('update-success'))
+    Swal.fire({
+        icon: "success",
+        title: "ปรับปรุงข้อมูลสำเร็จ",        
+        showConfirmButton: false,
+        timer: 1500
+        });
+    @endif
 })
 
 </script>

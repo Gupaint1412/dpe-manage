@@ -102,6 +102,7 @@ class HomeController extends Controller
             // แปลง array ของพาธรูปภาพให้เป็น JSON string ก่อนบันทึกลงฐานข้อมูล
             'path_img' => $imagePaths,
         ]);
+        $request->session()->flash('storage-success');
         return redirect()->route('device');
     }
 
@@ -197,7 +198,7 @@ class HomeController extends Controller
 
         // 7. อัปเดตข้อมูลอุปกรณ์ในฐานข้อมูล
         $device->update($updateData);
-
+        $request->session()->flash('update-success');
         return redirect()->route('device')->with('success', 'Device updated successfully!');
     }
 
