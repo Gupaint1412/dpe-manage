@@ -27,6 +27,26 @@
   [x-cloak] {
   display: none !important;
 }
+.swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 </style>
 @endpush
 
@@ -342,14 +362,23 @@
                                         <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"> 
                                             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
                                                 <div class="col-span-12 space-y-6 xl:col-span-12">
-                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-
+                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
+                                                    
                                                      @if($j->path_img && is_array($j->path_img) && count($j->path_img) > 0)
-                                                        @foreach($j->path_img as $imagePath)
-                                                            <div class="mb-5 overflow-hidden rounded-lg">
-                                                                <img src="{{ asset($imagePath) }}" style="max-height: 250px; width: auto;" alt="Device Image" class="rounded-lg object-cover">
-                                                            </div>
-                                                        @endforeach
+                                                      <div class="swiper mySwiper">
+                                                        <div class="swiper-wrapper">
+                                                          @foreach($j->path_img as $imagePath)
+                                                          <div class="swiper-slide">
+                                                              {{-- <div class="mb-5 overflow-hidden rounded-lg"> --}}
+                                                                  <img  src="{{ asset($imagePath) }}" style="max-height:30vw" alt="Device Image" class="rounded-lg object-cover">
+                                                              {{-- </div> --}}
+                                                          </div>
+                                                          @endforeach
+                                                        </div>
+                                                        <div class="swiper-button-next"></div>
+                                                        <div class="swiper-button-prev"></div>
+                                                         <div class="swiper-pagination"></div>
+                                                      </div>
                                                     @else
                                                         <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
                                                             ไม่มีรูปภาพสำหรับอุปกรณ์นี้
@@ -431,8 +460,30 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             });
-        });
-    
+  });
+
+  // Initialize Swiper
+   var swiper = new Swiper(".mySwiper", {
+                // ตัวเลือกหลักๆ
+                slidesPerView: 1, // แสดงทีละ 1 รูป
+                spaceBetween: 30, // ระยะห่างระหว่างสไลด์ (ถ้ามีหลายรูปต่อหน้า)
+                loop: true, // วนลูปเมื่อถึงรูปสุดท้าย
+
+                // เพิ่ม pagination (แถบจุดด้านล่าง)
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+
+                // เพิ่ม navigation (ปุ่มซ้าย-ขวา)
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+
+                
+            });
+  
 </script>
 
 @endpush

@@ -323,13 +323,39 @@
                             </div>
                           </td>
                           <td class="py-3">
-                            <div x-data="{isModalOpen: false}">
+                            <div x-data="{
+                                isModalOpen: false,
+                                deviceData: null,
+                                loading: false,
+                                error: null,
+                                loadDeviceData: async function(deviceId) {
+                                    this.loading = true;
+                                    this.error = null;
+                                    try {
+                                        const response = await axios.get(`/dpe-manage/public/api/device/${deviceId}`); // ใช้ Axios เรียก API
+                                        this.deviceData = response.data;
+                                        this.isModalOpen = true; // เปิด Modal หลังจากโหลดข้อมูลสำเร็จ
+                                    } catch (e) {
+                                        console.error('Error loading device data:', e);
+                                        this.error = 'ไม่สามารถโหลดข้อมูลอุปกรณ์ได้';
+                                        this.deviceData = null;
+                                        this.isModalOpen = true; // อาจจะยังคงเปิด Modal เพื่อแสดงข้อผิดพลาด
+                                    } finally {
+                                        this.loading = false;
+                                    }
+                                }
+                            }">
                                 {{-- ปุ่มเปิด Modal --}}
-                               <button class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600" @click="isModalOpen = !isModalOpen">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                              </button>
+                                {{-- สมมติว่าคุณมี $j->id สำหรับแต่ละปุ่มเพื่อส่ง ID ของอุปกรณ์ --}}
+                                <button
+                                    class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600"
+                                    @click="loadDeviceData({{ $j->id }})" {{-- ส่ง ID ของอุปกรณ์ไปยังฟังก์ชัน loadDeviceData --}}
+                                >
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                                {{-- <a href="{{route('edit_device',$j->id)}}">edit</a> --}}
                                 {{-- Modal --}}
-                                <div x-show="isModalOpen"class="fixed inset-0 flex items-center justify-center p-5 overflow-y-auto modal z-99999">
+                                <div x-show="isModalOpen" class="fixed inset-0 flex items-center justify-center p-5 overflow-y-auto modal z-99999">
                                     <div class="modal-close-btn fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"></div>
                                     <div @click.outside="isModalOpen = false" class="relative w-full max-w-[600px] rounded-3xl bg-white p-6 dark:bg-gray-900 lg:p-10">
                                         {{-- close btn --}}
@@ -338,39 +364,46 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.04289 16.5413C5.65237 16.9318 5.65237 17.565 6.04289 17.9555C6.43342 18.346 7.06658 18.346 7.45711 17.9555L11.9987 13.4139L16.5408 17.956C16.9313 18.3466 17.5645 18.3466 17.955 17.956C18.3455 17.5655 18.3455 16.9323 17.955 16.5418L13.4129 11.9997L17.955 7.4576C18.3455 7.06707 18.3455 6.43391 17.955 6.04338C17.5645 5.65286 16.9313 5.65286 16.5408 6.04338L11.9987 10.5855L7.45711 6.0439C7.06658 5.65338 6.43342 5.65338 6.04289 6.0439C5.65237 6.43442 5.65237 7.06759 6.04289 7.45811L10.5845 11.9997L6.04289 16.5413Z" fill=""></path>
                                             </svg>
                                         </button>
-                                        
-                                        <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"> 
-                                            <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
-                                                <div class="col-span-12 space-y-6 xl:col-span-12">
-                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
 
-                                                     @if($j->path_img && is_array($j->path_img) && count($j->path_img) > 0)
-                                                        @foreach($j->path_img as $imagePath)
-                                                            <div class="mb-5 overflow-hidden rounded-lg">
-                                                                <img src="{{ asset($imagePath) }}" style="max-height: 250px; width: auto;" alt="Device Image" class="rounded-lg object-cover">
-                                                            </div>
-                                                        @endforeach
-                                                    @else
-                                                        <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
-                                                            ไม่มีรูปภาพสำหรับอุปกรณ์นี้
+                                        <div x-show="loading" class="text-center text-gray-500 dark:text-gray-400">กำลังโหลดข้อมูล...</div>
+                                        <div x-show="error" class="text-center text-red-500 dark:text-red-400" x-text="error"></div>
+
+                                        <template x-if="deviceData && !loading">
+                                            <div class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]">
+                                                <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+                                                    <div class="col-span-12 space-y-6 xl:col-span-12">
+                                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+
+                                                            {{-- ตรวจสอบว่า deviceData.path_img มีอยู่และเป็น Array --}}
+                                                            <template x-if="deviceData.path_img && Array.isArray(deviceData.path_img) && deviceData.path_img.length > 0">
+                                                                <template x-for="imagePath in deviceData.path_img" :key="imagePath">
+                                                                    <div class="mb-5 overflow-hidden rounded-lg">
+                                                                        <img :src="`{{ asset('') }}${imagePath}`" style="max-height: 250px; width: auto;" alt="Device Image" class="rounded-lg object-cover">
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                            <template x-if="!deviceData.path_img || deviceData.path_img.length === 0">
+                                                                <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
+                                                                    ไม่มีรูปภาพสำหรับอุปกรณ์นี้
+                                                                </div>
+                                                            </template>
+
                                                         </div>
-                                                    @endif                                                 
-                                                  </div>                                                   
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
+                                                        <span x-text="`${deviceData.brand}-${deviceData.model} No.${deviceData.eq_no}`"></span>
+                                                    </h4>
+                                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                        <span x-text="deviceData.description || 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi architecto aspernatur cum et ipsum'"></span>
+                                                    </p>
+                                                    <a :href="`/dpe-manage/public/edit_device/${deviceData.id}`" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
+                                                        Read more
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90">
-                                                    {{$j->brand}}-{{$j->model}} No.{{$j->eq_no}}
-                                                </h4>
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-                                                    architecto aspernatur cum et ipsum
-                                                </p>
-                                                <a href="{{route('edit_device',$j->id)}}" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-3 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
-                                                    Read more
-                                                </a>
-                                            </div>
-                                        </div>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -432,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-    
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 </script>
 
 @endpush

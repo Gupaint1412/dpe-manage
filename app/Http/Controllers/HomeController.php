@@ -8,6 +8,7 @@ use App\Models\Devicemodel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; // สำหรับลบไฟล์เก่า
+use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
     /**
@@ -49,8 +50,9 @@ class HomeController extends Controller
     }
 
     public function store_device(Request $request){        
-         // 1. ตรวจสอบความถูกต้องของข้อมูลที่ส่งมา (Validation)
+        // 1. ตรวจสอบความถูกต้องของข้อมูลที่ส่งมา (Validation)
         // หากข้อมูลไม่ถูกต้อง Laravel จะ redirect กลับไปยังหน้าฟอร์มเดิมพร้อมแสดงข้อผิดพลาด
+        // dd($request->all());
         $validatedData = $request->validate([
             'type' => 'required|string|max:255', // ประเภทอุปกรณ์ (จำเป็นต้องระบุ, เป็นข้อความ, ไม่เกิน 255 ตัวอักษร)
             'subtype' => 'required|string|max:255', // ชนิดย่อยของอุปกรณ์ (จำเป็นต้องระบุ, เป็นข้อความ, ไม่เกิน 255 ตัวอักษร)
@@ -64,6 +66,7 @@ class HomeController extends Controller
             'images' => 'array|nullable', // 'images' ต้องเป็น array และสามารถเป็นค่าว่างได้ (ถ้าไม่มีการอัปโหลดรูป)
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // แต่ละไฟล์ใน array 'images' ต้องเป็นรูปภาพ, นามสกุลที่อนุญาต, ขนาดไม่เกิน 2MB (2048 KB)
         ]);
+          
 
         $imagePaths = [];
         // 2. จัดการการอัปโหลดรูปภาพหลายรูป
@@ -71,6 +74,7 @@ class HomeController extends Controller
         if ($request->hasFile('images')) {
             // กำหนดพาธปลายทางสำหรับเก็บรูปภาพใน public folder
             // รูปภาพจะถูกเก็บที่ public/All_Device
+            
             $destinationPath = 'All_Device';
 
             // วนลูปผ่านไฟล์รูปภาพแต่ละไฟล์ที่ถูกอัปโหลด
@@ -87,9 +91,9 @@ class HomeController extends Controller
                 $imagePaths[] = $destinationPath . '/' . $imageName;
             }
         }
-        // dd($imagePaths);
+    //    dd($imagePaths);
         // 3. บันทึกข้อมูลอุปกรณ์ลงในฐานข้อมูล
-        Devicemodel::create([
+        Devicemodel::create([            
             'type' => $validatedData['type'],
             'type_eq' => $validatedData['subtype'], // แมป 'subtype' จากฟอร์มไปยัง 'type_eq' ในฐานข้อมูล
             'brand' => $validatedData['brand'],
@@ -132,7 +136,7 @@ class HomeController extends Controller
             // is_required จะเป็น '1' ถ้าถูกติ๊ก, ถ้าไม่ติ๊กจะไม่มีค่าใน request หรือเป็น null/false
             'is_required' => 'nullable|boolean', // เพิ่ม validation สำหรับ checkbox
         ];
-
+       
         // 3. ถ้า is_required ถูกติ๊ก (ผู้ใช้ต้องการเปลี่ยนรูปภาพ) ให้เพิ่มกฎ validation สำหรับ images
         if ($request->has('is_required') && $request->input('is_required') == '1') {
             $validationRules['images'] = 'array|required'; // ต้องมีรูปภาพถ้าเลือกเปลี่ยน
@@ -158,7 +162,7 @@ class HomeController extends Controller
             'service_life' => $validatedData['service_life'],
             'os' => $validatedData['os'],
         ];
-
+        // dd($updateData);
         // 6. จัดการการอัปโหลดรูปภาพใหม่ (ถ้าผู้ใช้เลือกที่จะเปลี่ยนรูปภาพ)
         if ($request->has('is_required') && $request->input('is_required') == '1' && $request->hasFile('images')) {
             $imagePaths = [];
@@ -166,7 +170,7 @@ class HomeController extends Controller
             // ลบรูปภาพเก่าออกก่อน
             if ($device->path_img) {
                 // path_img ควรเก็บเป็น JSON array ของ path รูปภาพ
-                $existingImages = json_decode($device->path_img, true);
+                $existingImages = $device->path_img;
                 if (is_array($existingImages)) {
                     foreach ($existingImages as $oldImagePath) {
                         // ตรวจสอบว่าไฟล์มีอยู่จริงก่อนลบ
@@ -189,6 +193,7 @@ class HomeController extends Controller
             // เพิ่ม path รูปภาพใหม่เข้าไปในข้อมูลอัปเดต
             $updateData['path_img'] = $imagePaths;
         }
+        // dd($imagePaths);
         // ถ้า is_required ไม่ได้ถูกติ๊ก หรือไม่มีไฟล์ภาพใหม่ส่งมา และเดิมมีภาพอยู่แล้ว
         // เราจะไม่ไปยุ่งกับ path_img เพื่อคงภาพเดิมไว้
         // ถ้า is_required ถูกติ๊ก แต่ไม่มีไฟล์ภาพส่งมา (จาก validation rules ด้านบน)
@@ -206,4 +211,22 @@ class HomeController extends Controller
     {
         return view('page.borrow_eq');
     }
+
+   public function api_device($id)
+{
+    Log::info("Attempting to find device with ID: " . $id); // เพิ่มบรรทัดนี้
+    $device = Devicemodel::find($id);
+
+    if ($device) {
+        Log::info("Device found: " . $device->id); // เพิ่มบรรทัดนี้
+        // ถ้า $device->path_img เป็น JSON string ใน DB, ควร decode มัน
+        // ถ้าใช้ $casts ใน Model แล้ว ไม่ต้องทำบรรทัดนี้
+        // $device->path_img = json_decode($device->path_img, true);
+        return response()->json($device);
+    } else {
+        Log::warning("Device with ID: " . $id . " not found."); // เพิ่มบรรทัดนี้
+        return response()->json(['error' => 'Device not found'], 404);
+    }
+}
+    
 }

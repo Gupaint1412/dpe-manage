@@ -235,21 +235,8 @@
     // เรียกใช้งานฟังก์ชันครั้งแรกเมื่อหน้าโหลด
     updateSubTypeOptions();
 
-    // ส่วนของ Javascript สำหรับ checkbox และ file input (เหมือนเดิม)
-    const checkbox = document.querySelector('input[name="is_required"]');
-    const fileInput = document.querySelector('input[name="images[]"]');
-
-    // ตั้งค่า disabled ตามค่าเริ่มต้น (ควรเป็น true)
-    fileInput.disabled = true;
-
-    checkbox.addEventListener('change', function() {
-        if (this.checked) {
-            fileInput.disabled = false;
-        } else {
-            fileInput.disabled = true;
-            fileInput.value = '';
-        }
-    });
+   
+  
 });
 </script>
 @endpush

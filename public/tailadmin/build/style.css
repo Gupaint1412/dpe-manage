@@ -2806,6 +2806,7 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+
   .lg\:d-none {
     @media (width <= 1024px) {
       display: none;

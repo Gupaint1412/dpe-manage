@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome-6.7.2/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <style>
         body {
@@ -57,7 +58,9 @@
     <script src="{{ asset('datatable/dataTables.min.js') }}"></script>
     <script src="{{ asset('fontawesome-6.7.2/js/all.min.js') }}"></script>
     <script src="{{ asset('sweetalert2/dist/sweetalert2.min.js')}} "></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
+    {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     @include('Event.auth_event')
     @include('Event.notification_event')    
     @stack('js')

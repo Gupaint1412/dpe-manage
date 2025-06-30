@@ -16,3 +16,5 @@ Route::get('/edit_device/{id}',[HomeController::class,'edit_device'])->name('edi
 Route::put('/update_device/{id}',[HomeController::class,'update_device'])->name('update_device');
 Route::get('/delete_device/{id}',[HomeController::class,'delete_device'])->name('delete_device');
 Route::get('/borrow_eq',[HomeController::class,'borrow_eq'])->name('borrow_eq');
+
+Route::get('/api/device/{id}', [HomeController::class, 'api_device'])->name('api.device.getById');
