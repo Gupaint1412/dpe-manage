@@ -235,5 +235,11 @@ class HomeController extends Controller
         $users = User::all(); // ดึงข้อมูลผู้ใช้ทั้งหมดจากฐานข้อมูล
         return view('page.manage_user',compact('users'));
     }
+
+    public function update_user(Request $request ,$id)
+    {
+        $user = User::find($id);
+        dd($request->all());
+    }
     
 }

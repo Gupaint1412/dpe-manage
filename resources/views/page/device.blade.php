@@ -357,7 +357,7 @@
                           <td class="py-3">
                             <div x-data="{isModalOpen: false}">
                                 {{-- ปุ่มเปิด Modal --}}
-                               <button class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600" @click="isModalOpen = !isModalOpen">
+                              <button class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600" @click="isModalOpen = !isModalOpen">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                               </button>
                                 {{-- Modal --}}
