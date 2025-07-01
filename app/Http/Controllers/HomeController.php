@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Typemodel;
 use App\Models\Devicemodel;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; // สำหรับลบไฟล์เก่า
@@ -213,20 +214,26 @@ class HomeController extends Controller
     }
 
    public function api_device($id)
-{
-    Log::info("Attempting to find device with ID: " . $id); // เพิ่มบรรทัดนี้
-    $device = Devicemodel::find($id);
+    {
+        Log::info("Attempting to find device with ID: " . $id); // เพิ่มบรรทัดนี้
+        $device = Devicemodel::find($id);
 
-    if ($device) {
-        Log::info("Device found: " . $device->id); // เพิ่มบรรทัดนี้
-        // ถ้า $device->path_img เป็น JSON string ใน DB, ควร decode มัน
-        // ถ้าใช้ $casts ใน Model แล้ว ไม่ต้องทำบรรทัดนี้
-        // $device->path_img = json_decode($device->path_img, true);
-        return response()->json($device);
-    } else {
-        Log::warning("Device with ID: " . $id . " not found."); // เพิ่มบรรทัดนี้
-        return response()->json(['error' => 'Device not found'], 404);
+        if ($device) {
+            Log::info("Device found: " . $device->id); // เพิ่มบรรทัดนี้
+            // ถ้า $device->path_img เป็น JSON string ใน DB, ควร decode มัน
+            // ถ้าใช้ $casts ใน Model แล้ว ไม่ต้องทำบรรทัดนี้
+            // $device->path_img = json_decode($device->path_img, true);
+            return response()->json($device);
+        } else {
+            Log::warning("Device with ID: " . $id . " not found."); // เพิ่มบรรทัดนี้
+            return response()->json(['error' => 'Device not found'], 404);
+        }
     }
-}
+
+    public function manage_user()
+    {
+        $users = User::all(); // ดึงข้อมูลผู้ใช้ทั้งหมดจากฐานข้อมูล
+        return view('page.manage_user',compact('users'));
+    }
     
 }

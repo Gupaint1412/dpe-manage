@@ -312,9 +312,21 @@
                           </td>
                           <td class="py-3">
                             <div class="flex items-center">
-                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                              {{$currentYear - $j->service_life}} ปี
-                              </p>
+                              @if($currentYear - $j->service_life >= 8 )
+                                <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">
+                                  {{$currentYear - $j->service_life}} ปี
+                                </p>
+                              @elseif($currentYear - $j->service_life >= 5)
+                                <p class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-600 dark:bg-warning-500/15 dark:text-warning-500">
+                                  {{$currentYear - $j->service_life}} ปี
+                                </p>
+                              @else
+                                <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">
+                                  {{$currentYear - $j->service_life}} ปี
+                                </p>
+                              @endif
+                              
+
                             </div>
                           </td>
                           <td class="py-3">
@@ -365,7 +377,7 @@
                                                     {{$j->brand}} รุ่น {{$j->model}} หมายเลข &nbsp;{{$j->eq_no}}
                                             </h4>
                                             <a href="{{route('edit_device',$j->id)}}" style="margin-right: 4rem" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-3 py-2 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
-                                              แก้ไขข้อมูล
+                                              <i class="fa-solid fa-pen-to-square"></i>แก้ไขข้อมูล
                                             </a>
                                           </div>
                                             <div class="grid grid-cols-12 gap-4 md:gap-6 ">
@@ -396,17 +408,61 @@
                                                 </div>
                                             </div>
                                             <div>
-                                              <div class="grid grid-cols-12 gap-4 md:gap-6 ">
+                                              <div class="grid grid-cols-12 gap-4 md:gap-6 " style="padding-top: 1rem">
                                                  <div class="col-span-12 space-y-6 xl:col-span-12">
                                                   <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                                                     <div class="mb-5 overflow-hidden rounded-lg">
                                                       <div class="d-flex px-5" style="justify-content:space-between;">
-                                                        <h6 style="margin: 0">หมวดหมู่ : {{$j->type}}</h6>
-                                                        <h6 style="margin: 0">ประเภท : {{$j->type_eq}}</h6>
+                                                        <div class="d-flex">
+                                                          <h6 style="margin: 0;padding-right:.25rem">หมวดหมู่ : </h6> 
+                                                          @if($j->type == "อุปกรณ์ทำงานสารสนเทศ")
+                                                            <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
+                                                          @elseif($j->type == "อุปกรณ์นำเสนอ")
+                                                            <p class="rounded-full bg-projector px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-projector dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
+                                                          @elseif($j->type == "อุปกรณ์เครือข่าย")
+                                                            <p class="rounded-full bg-network px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-network dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
+                                                          @else
+                                                            <p class="rounded-full bg-gray-500 px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-gray-500 dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
+                                                          @endif                                                          
+                                                        </div>
+                                                        <div class="d-flex">
+                                                          <h6 style="margin: 0;padding-right:.25rem">ประเภท :</h6>
+                                                          @if($j->type_eq == "Computer")
+                                                            <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>    
+                                                          @elseif($j->type_eq == "Notebook")
+                                                            <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>    
+                                                          @elseif($j->type_eq == "Tablet")
+                                                            <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>    
+                                                          @elseif($j->type_eq == "Projector")
+                                                            <p class="rounded-full bg-projector px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-projector dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>    
+                                                          @elseif($j->type_eq == "Printer&Scanner")
+                                                            <p class="rounded-full bg-projector px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-projector dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>
+                                                          @elseif($j->type_eq == "Network")
+                                                            <p class="rounded-full bg-network px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-network dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>
+                                                          @else
+                                                            <p class="rounded-full bg-gray-500 px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-gray-500 dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>
+                                                          @endif  
+                                                        </div>
+                                                        
                                                       </div>
-                                                      <div class="d-flex px-5" style="justify-content: space-between">
+                                                      <div class="d-flex px-5" style="justify-content: space-between;margin-top: .5rem">
                                                         <h6 style="margin: 0">เลขครุภัณฑ์ : {{$j->eq_number}}</h6>
-                                                        <h6 style="margin: 0">อายุการใช้งาน : {{$currentYear - $j->service_life}} ปี</h6>
+                                                        <div class="d-flex">
+                                                          <h6 style="margin: 0;padding-right:.25rem">อายุการใช้งาน :</h6>
+                                                          @if($currentYear - $j->service_life >= 8 )
+                                                            <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">
+                                                              {{$currentYear - $j->service_life}} ปี
+                                                            </p>
+                                                          @elseif($currentYear - $j->service_life >= 5)
+                                                            <p class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-600 dark:bg-warning-500/15 dark:text-warning-500">
+                                                              {{$currentYear - $j->service_life}} ปี
+                                                            </p>
+                                                          @else
+                                                            <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">
+                                                              {{$currentYear - $j->service_life}} ปี
+                                                            </p>
+                                                          @endif
+                                                        </div>
                                                       </div>
                                                     </div>
                                                     <div class="mb-5 overflow-hidden rounded-lg">
@@ -414,8 +470,18 @@
                                                         <h6 style="margin: 0">รุ่น : {{$j->brand}}-{{$j->model}}</h6>
                                                         <h6 style="margin: 0">หมายเลขเครื่อง : {{$j->eq_no}}</h6>
                                                       </div>
-                                                      <div class="d-flex px-5" style="justify-content: space-between">
-                                                        <h6 style="margin: 0">ระบบปฏิบัติการ : {{$j->os}}</h6>
+                                                      <div class="d-flex px-5" style="justify-content: space-between;margin-top: .5rem">
+                                                        <div class="d-flex">                                                                                                                                                                               
+                                                          <h6 style="margin: 0">ระบบปฏิบัติการ : </h6>  
+                                                          @if($j->os == "Windows 11" || $j->os == "Windows 10")
+                                                            <p><i class="fa-brands fa-windows" style="font-size: large;padding-left:.25rem;padding-right:.2rem;color:#0078d7"></i>{{$j->os}}</p>     
+                                                          @elseif($j->os == "Ubuntu" || $j->os == "Linux")
+                                                            <p><i class="fa-brands fa-ubuntu" style="font-size: large;padding-left:.25rem;padding-right:.2rem;color:#E95420"></i>{{$j->os}}</p>     
+                                                          @elseif($j->os == "MacOS")
+                                                            <p><i class="fa-brands fa-apple" style="font-size: large;padding-left:.25rem;padding-right:.2rem;color:#000000"></i>{{$j->os}}</p>                                                             
+                                                          @endif                                                   
+                                                        </div>
+                                                        
                                                         <h6 style="margin: 0">สถานะ : {{$j->status}}</h6>
                                                       </div>
                                                     </div>
