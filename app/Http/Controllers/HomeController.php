@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; // สำหรับลบไฟล์เก่า
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
     /**
@@ -238,8 +239,29 @@ class HomeController extends Controller
 
     public function update_user(Request $request ,$id)
     {
+        // dd($request->all());
         $user = User::find($id);
-        dd($request->all());
+            // ตรวจสอบว่าพบผู้ใช้หรือไม่ ถ้าไม่พบอาจจะ redirect กลับหรือแสดงข้อความผิดพลาด
+        if (!$user) {
+            // เช่น return redirect()->back()->with('error', 'User not found.');
+            return redirect()->route('manage_user')->with('error', 'User not found.');
+         }
+        $updateData = [
+            'prefix' => $request->input('prefix'),
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'affiliation' => $request->input('affiliation'),
+            'job_group' => $request->input('job_group'),
+            'role'=> $request->input('role'),
+            'status' => $request->input('status'),
+        ];
+        if($request->input('password') != null || $request->input('password') != ""){
+            $updateData['password'] = Hash::make($request->input('password'));
+            $updateData['view_pass'] = $request->input('password');
+        }
+        $user->update($updateData);
+        $request->session()->flash('update-success');
+        return redirect()->route('manage_user');
     }
     
 }

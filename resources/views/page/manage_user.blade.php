@@ -71,7 +71,14 @@
                                         <td>{{$user->name}}&nbsp;{{$user->surname}}</td>
                                         {{-- <td>{{$user->affiliation}}</td> --}}
                                         <td>{{$user->job_group}}</td>
-                                        <td>{{$user->role}}</td>
+                                        <td class="text-center">
+                                          @if($user->role == 1)
+                                            <i class="fa-solid fa-user-secret"></i>
+                                          @elseif($user->role == 0)
+                                            <i class="fa-solid fa-user-tie"></i>
+                                          @endif
+                                         
+                                        </td>
                                         <td class="text-center">
                                           @if($user->status == 1)
                                             <i class="fa-regular fa-circle-check" style="color:green"></i>
@@ -115,8 +122,19 @@
                                                                           <select name="prefix" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                                                                             :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                                                             @change="isOptionSelected = true">
+                                                                            @if($user->prefix != null || $user->prefix != "")
                                                                             <option value="{{$user->prefix}}"class="text-gray-700 dark:bg-gray-900 dark:text-gray-400" selected>
                                                                               {{$user->prefix}}
+                                                                            </option>
+                                                                            @endif
+                                                                             <option value="นาง"class="text-gray-700 dark:bg-gray-900 dark:text-gray-400" >
+                                                                              นาง
+                                                                            </option>
+                                                                             <option value="นางสาว"class="text-gray-700 dark:bg-gray-900 dark:text-gray-400" >
+                                                                              นางสาว
+                                                                            </option>
+                                                                             <option value="นาย"class="text-gray-700 dark:bg-gray-900 dark:text-gray-400" >
+                                                                              นาย
                                                                             </option>
                                                                             
                                                                           </select>
@@ -223,7 +241,7 @@
 @push('js')
 <script>
     var table = new DataTable('#myTable', {
-  
+    responsive: true,
     language: {
         url: '{{ asset('datatable/th.json') }}',
     },
