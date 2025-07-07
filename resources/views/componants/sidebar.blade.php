@@ -9,21 +9,23 @@
     :class="sidebarToggle ? 'justify-center' : 'justify-between'"
     class="sidebar-header flex items-center gap-2 pb-7 pt-8"
   >
-    <a href="index.html">
+    <a href="{{route('home')}}">
       <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-        <img class="dark:hidden" src="{{asset('tailadmin/build/src/images/logo/logo.svg')}}" alt="Logo" />
+        <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
         <img
           class="hidden dark:block"
-          src="{{asset('tailadmin/build/src/images/logo/logo-dark.svg')}}"
+          src="{{asset('Logo/DPE1.png')}}"
           alt="Logo"
+          style="width: 44px;height:44px"
         />
       </span>
 
       <img
         class="logo-icon"
         :class="sidebarToggle ? 'lg:block' : 'hidden'"
-        src="{{asset('tailadmin/build/src/images/logo/logo-icon.svg')}}"
+        src="{{asset('Logo/DPE1.png')}}"
         alt="Logo"
+        style="width: 44px;height:44px"
       />
     </a>
   </div>

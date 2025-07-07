@@ -47,6 +47,9 @@
       height: 100%;
       object-fit: contain;
     }
+  .mt-4{
+    margin-top:14px;
+  }
 </style>
 @endpush
 
@@ -407,13 +410,18 @@
                                                   </div>                                                   
                                                 </div>
                                             </div>
-                                            <div>
-                                              <div class="grid grid-cols-12 gap-4 md:gap-6 " style="padding-top: 1rem">
-                                                 <div class="col-span-12 space-y-6 xl:col-span-12">
-                                                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-                                                    <div class="mb-5 overflow-hidden rounded-lg">
-                                                      <div class="d-flex px-5" style="justify-content:space-between;">
-                                                        <div class="d-flex">
+                                             
+                                            {{-- <div class="d-flex">                                                                                                                                       --}}
+                                              <table class="w-full table-auto text-left">      
+                                                <thead style="text-align: center">
+                                                <tr>
+                                                  <h4 class="mt-4" style="text-align: center;font-size:larger">ข้อมูลรายการครุภัณฑ์</h4>
+                                                </tr>  
+                                                </thead>                                          
+                                                <tbody>
+                                                  <tr >
+                                                    <td>
+                                                      <div class="d-flex mt-4">
                                                           <h6 style="margin: 0;padding-right:.25rem">หมวดหมู่ : </h6> 
                                                           @if($j->type == "อุปกรณ์ทำงานสารสนเทศ")
                                                             <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
@@ -424,8 +432,10 @@
                                                           @else
                                                             <p class="rounded-full bg-gray-500 px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-gray-500 dark:text-white/90" style="color: #ffffff">{{$j->type}}</p>
                                                           @endif                                                          
-                                                        </div>
-                                                        <div class="d-flex">
+                                                      </div>
+                                                    </td>
+                                                    <td>
+                                                      <div class="d-flex mt-4">
                                                           <h6 style="margin: 0;padding-right:.25rem">ประเภท :</h6>
                                                           @if($j->type_eq == "Computer")
                                                             <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>    
@@ -442,12 +452,29 @@
                                                           @else
                                                             <p class="rounded-full bg-gray-500 px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-gray-500 dark:text-white/90" style="color: #ffffff">{{$j->type_eq}}</p>
                                                           @endif  
-                                                        </div>
-                                                        
                                                       </div>
-                                                      <div class="d-flex px-5" style="justify-content: space-between;margin-top: .5rem">
+                                                    </td>                                                    
+                                                  </tr>
+                                                  <tr >
+                                                    <td>
+                                                      <div class="d-flex mt-4">
+                                                        <h6 style="margin: 0">รุ่น : {{$j->brand}}-{{$j->model}}</h6>
+                                                      </div>
+                                                    </td>
+                                                    <td>
+                                                      <div class="d-flex mt-4">
+                                                        <h6 style="margin: 0">หมายเลขเครื่อง : {{$j->eq_no}}</h6>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>
+                                                      <div class="d-flex mt-4">
                                                         <h6 style="margin: 0">เลขครุภัณฑ์ : {{$j->eq_number}}</h6>
-                                                        <div class="d-flex">
+                                                      </div>
+                                                    </td>
+                                                    <td>
+                                                      <div class="d-flex mt-4">
                                                           <h6 style="margin: 0;padding-right:.25rem">อายุการใช้งาน :</h6>
                                                           @if($currentYear - $j->service_life >= 8 )
                                                             <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">
@@ -462,16 +489,12 @@
                                                               {{$currentYear - $j->service_life}} ปี
                                                             </p>
                                                           @endif
-                                                        </div>
                                                       </div>
-                                                    </div>
-                                                    <div class="mb-5 overflow-hidden rounded-lg">
-                                                      <div class="d-flex px-5" style="justify-content: space-between">
-                                                        <h6 style="margin: 0">รุ่น : {{$j->brand}}-{{$j->model}}</h6>
-                                                        <h6 style="margin: 0">หมายเลขเครื่อง : {{$j->eq_no}}</h6>
-                                                      </div>
-                                                      <div class="d-flex px-5" style="justify-content: space-between;margin-top: .5rem">
-                                                        <div class="d-flex">                                                                                                                                                                               
+                                                    </td>
+                                                  </tr>                                                  
+                                                  <tr>
+                                                    <td>
+                                                      <div class="d-flex mt-4">                                                                                                                                                                               
                                                           <h6 style="margin: 0">ระบบปฏิบัติการ : </h6>  
                                                           @if($j->os == "Windows 11" || $j->os == "Windows 10")
                                                             <p><i class="fa-brands fa-windows" style="font-size: large;padding-left:.25rem;padding-right:.2rem;color:#0078d7"></i>{{$j->os}}</p>     
@@ -480,15 +503,32 @@
                                                           @elseif($j->os == "MacOS")
                                                             <p><i class="fa-brands fa-apple" style="font-size: large;padding-left:.25rem;padding-right:.2rem;color:#000000"></i>{{$j->os}}</p>                                                             
                                                           @endif                                                   
-                                                        </div>
-                                                        
-                                                        <h6 style="margin: 0">สถานะ : {{$j->status}}</h6>
                                                       </div>
-                                                    </div>
-                                                  </div>
-                                                 </div>
-                                              </div>
-                                            </div>
+                                                    </td>
+                                                    <td>
+                                                      <div class="d-flex mt-4">
+                                                        @if($j->status == 0)
+                                                          <div class="d-flex">
+                                                            <h6 style="margin: 0">สถานะ : </h6>
+                                                            <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">พร้อมใช้งาน</p>
+                                                          </div>
+                                                        @elseif($j->status == 1)
+                                                          <div class="d-flex">
+                                                            <h6 style="margin: 0">สถานะ : </h6>
+                                                            <p class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-600 dark:bg-warning-500/15 dark:text-warning-500">อยู่ระหว่างยืม</p>
+                                                          </div>
+                                                        @elseif($j->status == 99)
+                                                          <div class="d-flex">
+                                                            <h6 style="margin: 0">สถานะ : </h6>
+                                                            <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">จำหน่าย</p>
+                                                          </div>
+                                                        @endif
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            {{-- </div>                                            --}}
                                         </div>
                                     </div>
                                 </div>
