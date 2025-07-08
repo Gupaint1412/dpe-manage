@@ -9,24 +9,19 @@
     :class="sidebarToggle ? 'justify-center' : 'justify-between'"
     class="sidebar-header flex items-center gap-2 pb-7 pt-8"
   >
-    <a href="{{route('home')}}">
+    <a href="{{route('home')}}" class="d-flex">
       <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-        <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
-        <img
-          class="hidden dark:block"
-          src="{{asset('Logo/DPE1.png')}}"
-          alt="Logo"
-          style="width: 44px;height:44px"
-        />
+        <div class="d-flex" style="align-items:center;">
+          <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
+          <h3 class="dark:hidden">DPE DeviceOps</h3>       
+        </div>
+        <div class="d-flex" style="align-items:center">
+          <img class="hidden dark:block" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
+          <h3 class="hidden dark:block dark:text-gray-400">DPE DeviceOps</h3>       
+        </div>
       </span>
-
-      <img
-        class="logo-icon"
-        :class="sidebarToggle ? 'lg:block' : 'hidden'"
-        src="{{asset('Logo/DPE1.png')}}"
-        alt="Logo"
-        style="width: 44px;height:44px"
-      />
+      
+      <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
     </a>
   </div>
   <!-- SIDEBAR HEADER -->

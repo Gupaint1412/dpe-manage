@@ -26,6 +26,12 @@
         <!-- ===== Main Content Start ===== -->
         <main>
            <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">            
+            <div class="mb-6 flex items-center " style="justify-content:space-between">
+              <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>
+              <a href="{{route('form_eq')}}"class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
+                <i class="fa-regular fa-square-plus"></i>จองอุปกรณ์
+              </a>
+            </div>
             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
               <div class="col-span-12 space-y-6 xl:col-span-12">
                 <div class="grid grid-cols-1 gap-4">

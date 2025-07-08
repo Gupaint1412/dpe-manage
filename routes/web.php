@@ -23,4 +23,6 @@ Route::get('/manage_user/edit/{id}',[HomeController::class,'edit_user'])->name('
 Route::put('/manage_user/update/{id}',[HomeController::class,'update_user'])->name('update_user');
 Route::get('/manage_user/delete/{id}',[HomeController::class,'delete_user'])->name('delete_user');
 
+Route::get('/form_borrow_eq',[HomeController::class,'form_borrow_equment'])->name('form_eq');
+
 Route::get('/api/device/{id}', [HomeController::class, 'api_device'])->name('api.device.getById');

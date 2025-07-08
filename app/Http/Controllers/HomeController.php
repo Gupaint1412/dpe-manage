@@ -263,5 +263,8 @@ class HomeController extends Controller
         $request->session()->flash('update-success');
         return redirect()->route('manage_user');
     }
-    
+    public function form_borrow_equment()
+    {
+        return view('page.form_borrow_eq');
+    }
 }
