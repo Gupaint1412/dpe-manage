@@ -49,10 +49,10 @@
                             <path d="M128 32C92.7 32 64 60.7 64 96l0 256 64 0 0-256 384 0 0 256 64 0 0-256c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2C0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8c0-10.6-8.6-19.2-19.2-19.2L19.2 384z"/>
                           </svg>                        
                         </div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Laptops</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Notebook</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        12  เครื่อง
+                        {{$notebook}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -105,7 +105,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Projectors</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        9  เครื่อง
+                        {{$projector}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -118,7 +118,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Network</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        12  เครื่อง
+                        {{$network}}  เครื่อง
                       </span>
                     </div>
                   </div>

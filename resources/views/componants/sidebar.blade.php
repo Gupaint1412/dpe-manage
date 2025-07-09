@@ -13,11 +13,11 @@
       <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
         <div class="d-flex" style="align-items:center;">
           <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
-          <h3 class="dark:hidden">DPE DeviceOps</h3>       
+          <h3 class="dark:hidden" style="padding-left:.5rem">DPE DeviceOps</h3>       
         </div>
         <div class="d-flex" style="align-items:center">
           <img class="hidden dark:block" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
-          <h3 class="hidden dark:block dark:text-gray-400">DPE DeviceOps</h3>       
+          <h3 class="hidden dark:block dark:text-gray-400" style="padding-left: .5rem">DPE DeviceOps</h3>       
         </div>
       </span>
       
