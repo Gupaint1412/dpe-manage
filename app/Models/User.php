@@ -25,6 +25,7 @@ class User extends Authenticatable
         'job_group',
         'job_position',
         'email',
+        'phone',
         'password',
         'view_pass',
         'status',

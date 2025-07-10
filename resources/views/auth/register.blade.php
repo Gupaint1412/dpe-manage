@@ -81,11 +81,15 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="phone"><span class="required">*</span>เบอร์โทรศัพท์</label>
+                                <input type="text" class="form-control" maxlength="10" name="phone" required>                     
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <label for="job_position"><span class="required">*</span>ตำแหน่งงาน</label>
                                 <input type="text" class="form-control" name="job_position" required>                     
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="email"><span class="required">*</span><i class="fa-regular fa-envelope icon_label"></i>อีเมล</label> <label for="text" class="required">(ใช้สำหรับเข้าสู่ระบบ)</label>
                                 <input type="email" class="form-control" name="email" required>                                      
                             </div>

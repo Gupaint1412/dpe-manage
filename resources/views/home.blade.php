@@ -127,6 +127,31 @@
               </div> 
                      
             </div>
+            <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+              <div class="col-span-12 space-y-6 xl:col-span-12">
+                  <div class="grid grid-cols-1 gap-4">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+                      <table>
+                         <tr>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Country</th>
+                          </tr>
+                          <tr>
+                            <td>Alfreds Futterkiste</td>
+                            <td>Maria Anders</td>
+                            <td>Germany</td>
+                          </tr>
+                          <tr>
+                            <td>Centro comercial Moctezuma</td>
+                            <td>Francisco Chang</td>
+                            <td>Mexico</td>
+                          </tr>
+                      </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
           </div>
         </main>
         <!-- ===== Main Content End ===== -->
