@@ -57,7 +57,12 @@ class LoginController extends Controller
                 $request->session()->flash('verify-user');
                 return redirect()->route('login');  #รออนุมัติ
             }
+             } else {
+            // *** ส่วนนี้คือกรณีล็อกอินไม่สำเร็จ (Username หรือ Password ผิด) ***
+            $request->session()->flash('login-error'); // เพิ่มข้อความ Flash
+            return redirect()->route('login'); // ส่งกลับไปหน้า Login พร้อมข้อความแจ้งเตือน
         }
+        
     }
     public function logout(Request $request)
     {

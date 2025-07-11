@@ -8,6 +8,9 @@
   .align-items-center {
     align-items: center;
   }
+  .text-center{
+    text-align: center
+  }
 </style>
 @endpush
 
@@ -132,33 +135,40 @@
                   <div class="grid grid-cols-1 gap-4">
                     <div class="rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
                       <div class="w-full overflow-x-auto">
-                        <table class="min-w-full" id="myTable">
+                        <table class="min-w-full" id="myborrow">
+                          <caption>ข้้อมูลการจองของฉัน</caption>
                           <!-- table header start -->
                           <thead >
                             <tr class="border-gray-100 border-y dark:border-gray-800">
-                              <th class="py-3">
-                                <div class="flex items-center">
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     รายการ
                                   </p>
                                 </div>
                               </th>                                            
-                              <th class="py-3">
+                              <th class="py-3 text-center">
                                 <div class="flex items-center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                    ประเภท
+                                    งาน
                                   </p>
                                 </div>
                               </th>
-                              
-                              <th class="py-3">
+                              <th class="py-3 text-center">
+                                <div class="flex items-center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    อุปกรณ์ที่ยืม
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
                                 <div class="flex items-center col-span-2">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     สถานะ
                                   </p>
                                 </div>
                               </th>
-                              <th class="py-3">
+                              <th class="py-3 text-center">
                                 <div class="flex items-center col-span-2">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     Action
@@ -170,23 +180,32 @@
                           <!-- table header end -->
 
                           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                        
-                            <tr>
-                              <td class="py-3">
-                              
-                              </td>                          
-                              
-                              <td class="py-3">
-                               
-                              </td>
-                              <td class="py-3">
-                               
-                              </td>
-                              <td class="py-3">
-                               
-                              </td>                             
-                            </tr> 
-                         
+                          @if($data_borrow->isEmpty())
+                             <tr>
+                                <td colspan="4"><h1>ไม่มีประวัติการยืม</h1></td> {{-- แนะนำให้ใส่ <h1> ไว้ใน <td> และใช้ colspan --}}
+                            </tr>
+                          @else
+                          @php $i = 1 @endphp
+                            @foreach($data_borrow as $j)
+                              <tr>
+                                <td class="py-3 text-center" style="text-align: center">
+                                  {{$i++}}
+                                </td>  
+                                <td class="py-3 ">
+                                  {{$j->job_of_use}}
+                                </td> 
+                                <td class="py-3">
+                                  {{$j->type_eq_borrow}}
+                                </td> 
+                                <td class="py-3">
+                                  {{$j->stage_borrow}}
+                                </td>         
+                                <td class="py-3">
+                                  {{$j->stage_borrow}}
+                                </td>                                 
+                              </tr> 
+                            @endforeach
+                          @endif
                           </tbody>
                         </table>
                       </div>
@@ -202,3 +221,13 @@
     </div>
     <!-- ===== Page Wrapper End ===== -->
 @endsection
+@push('js')
+<script>
+  var table = new DataTable('#myborrow', {
+  
+    language: {
+        url: '{{ asset('datatable/th.json') }}',
+    },
+});
+</script>
+@endpush

@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Typemodel;
 use App\Models\Devicemodel;
 use App\Models\User;
+use App\Models\BorrowEQ;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; // สำหรับลบไฟล์เก่า
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -31,6 +34,7 @@ class HomeController extends Controller
     public function index()
     {   
         $device = Devicemodel::where('deleted', 0)->get(); // นับจำนวนอุปกรณ์ที่ยังไม่ถูกลบ
+        $data_borrow = BorrowEQ::where('user_borrow_id',Auth::id())->get();
         $count_device = [            
             'computer' => Devicemodel::where('deleted',0)->where('type_eq', 'Computer')->count(),
             'notebook' => Devicemodel::where('deleted',0)->where('type_eq', 'Notebook')->count(),
@@ -39,8 +43,8 @@ class HomeController extends Controller
             'printer' => Devicemodel::where('deleted',0)->where('type_eq', 'Printer')->count(),        
             'network' => Devicemodel::where('deleted',0)->where('type_eq', 'Network')->count(),   
         ];
-        // dd($count_device['computer']);
-        return view('home',compact('device','count_device'));
+        // dd($data_borrow);
+        return view('home',compact('device','count_device','data_borrow'));
     }
     public function device()
     {
@@ -280,5 +284,84 @@ class HomeController extends Controller
     public function borrow_equment(Request $request)
     {
         dd($request->all());
+        $userId = Auth::id();
+        $borrow_type = $request->input('borrow_type');
+        $type_eq_borrow = $request->input('type_eq_borrow');
+        $job_of_use = $request->input('job_of_use');
+        $place_of_use = $request->input('place_of_use');
+        $number_borrow = $request->input('number_borrow');
+        $user_note = $request->input('user_note');
+        $borrow_date_th = $request->input('borrow_date'); // e.g., "11 กรกฎาคม 2568"
+        $return_date_th = $request->input('return_date'); // e.g., "11 กรกฎาคม 2568"
+        $convertThaiDateToCarbon = function ($thaiDateString) {
+            $parts = explode(' ', $thaiDateString);
+            $day = (int) $parts[0];
+            $monthNameThai = $parts[1];
+            $yearBuddhist = (int) $parts[2];
+
+            // Map เดือนภาษาไทยเป็นตัวเลข
+            $thaiMonths = [
+                'มกราคม' => 1, 'กุมภาพันธ์' => 2, 'มีนาคม' => 3, 'เมษายน' => 4,
+                'พฤษภาคม' => 5, 'มิถุนายน' => 6, 'กรกฎาคม' => 7, 'สิงหาคม' => 8,
+                'กันยายน' => 9, 'ตุลาคม' => 10, 'พฤศจิกายน' => 11, 'ธันวาคม' => 12,
+            ];
+
+            $month = $thaiMonths[$monthNameThai] ?? null;
+
+            if (is_null($month)) {
+                // จัดการข้อผิดพลาดถ้าหาชื่อเดือนไม่เจอ
+                throw new \InvalidArgumentException("Invalid Thai month name: " . $monthNameThai);
+            }
+
+            // แปลงปีพุทธศักราชเป็นคริสต์ศักราช
+            $yearGregorian = $yearBuddhist - 543;
+
+            // สร้าง Carbon object
+            // กำหนดเวลาเริ่มต้นเป็น 00:00:00 (เที่ยงคืน) หรือสามารถกำหนดเวลาได้ถ้ามีข้อมูล
+            return Carbon::createFromDate($yearGregorian, $month, $day)->startOfDay();
+        };
+
+        try {
+            $borrow_date_carbon = $convertThaiDateToCarbon($borrow_date_th);
+            $return_date_carbon = $convertThaiDateToCarbon($return_date_th);
+
+            // แปลง Carbon object เป็น string ในรูปแบบที่ MySQL เข้าใจ (YYYY-MM-DD HH:MM:SS)
+            $borrow_date_formatted = $borrow_date_carbon->toDateTimeString(); // หรือ ->toDateString() ถ้าเป็นแค่ DATE
+            $return_date_formatted = $return_date_carbon->toDateTimeString(); // หรือ ->toDateString() ถ้าเป็นแค่ DATE
+
+        } catch (\InvalidArgumentException $e) {
+            // จัดการกรณีที่แปลงวันที่ไม่ได้ (เช่น รูปแบบผิดพลาด)
+            return redirect()->back()->withErrors(['date_error' => 'รูปแบบวันที่ไม่ถูกต้อง: ' . $e->getMessage()]);
+        }
+
+        // ตัวอย่างการใช้งานเมื่อจะบันทึกลง database
+        BorrowEQ::create([
+            'user_borrow_id' => $userId,
+            'borrow_type' => $borrow_type,
+            'type_eq_borrow' => $type_eq_borrow,
+            'job_of_use' => $job_of_use,
+            'place_of_use' => $place_of_use,
+            'number_borrow' => $number_borrow,
+            'user_note' => $user_note,
+            'borrow_date' => $borrow_date_formatted, // ใช้ตัวแปรที่แปลงแล้ว
+            'return_date' => $return_date_formatted, // ใช้ตัวแปรที่แปลงแล้ว
+            'borrow_date_th' => $borrow_date_th,
+            'return_date_th' => $return_date_th,
+        ]);
+        $request->session()->flash('storage-success');
+        return redirect()->route('home');
+        // $data = [
+        //     'user_id' => $userId,
+        //     'borrow_type' => $borrow_type,
+        //     'type_eq_borrow' => $type_eq_borrow,
+        //     'job_of_use' => $job_of_use,
+        //     'place_of_use' => $place_of_use,
+        //     'number_borrow' => $number_borrow,
+        //     'borrow_date' => $borrow_date_formatted, // ใช้ตัวแปรที่แปลงแล้ว
+        //     'return_date' => $return_date_formatted, // ใช้ตัวแปรที่แปลงแล้ว
+        //     'borrow_date_th' => $borrow_date_th,
+        //     'return_date_th' => $return_date_th,
+        // ];
+        //  dd($data);
     }
 }

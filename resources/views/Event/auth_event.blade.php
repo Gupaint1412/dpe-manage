@@ -17,6 +17,15 @@ $(document).ready(function(){
         timer: 1500
         });
     @endif
+    @if(Session::has('login-error'))
+    Swal.fire({
+        icon: "error",
+        title: "Username หรือ Password ผิด",
+        text: 'โปรดตรวจสอบข้อมูลของท่านอีกครั้ง',
+        confirmButtonText: 'รับทราบ',
+        footer: '<a href="#">หรือติดต่อเจ้าหน้าที่กลุ่มเทคโนโลยีสารสนเทศฯ</a>'
+        });
+    @endif
     @if(Session::has('doc-store-success'))
     Swal.fire({
         // position: "top-end",

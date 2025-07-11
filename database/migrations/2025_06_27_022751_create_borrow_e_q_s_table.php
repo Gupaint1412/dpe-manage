@@ -14,12 +14,18 @@ return new class extends Migration
         Schema::create('borrow_e_q_s', function (Blueprint $table) {
             $table->id();            
             $table->integer('user_borrow_id')->comment('User ID Borrow');
-            $table->integer('user_borrow_accept')->comment('User ID Accept');
+            $table->integer('user_borrow_accept')->nullable()->comment('User ID Accept');
             $table->integer('eq_id')->comment('EQ ID');
             $table->integer('stage_borrow')->default(0)->comment('EQ Status: 0 = Pending, 1 = Accepted, 2 = Rejected');
             $table->dateTime('borrow_date')->nullable()->comment('Borrow Date');
             $table->dateTime('return_date')->nullable()->comment('Return Date');
             $table->string('borrow_type')->nullable()->comment('Borrow type');            
+            $table->string('place_of_use');
+            $table->string('type_eq_borrow');
+            $table->string('number_borrow');
+            $table->string('user_note')->nullable();
+            $table->string('admin_note')->nullable();
+            $table->string('job_of_use');
             $table->timestamps();
         });
     }

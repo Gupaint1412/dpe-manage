@@ -20,5 +20,7 @@ class BorrowEQ extends Model
         'user_note',            // หมายเหตุจากผู้ใช่งาน
         'admin_note',           // หมายเหตุจากผู้ดูแลระบบ
         'job_of_use',           // งานที่ทำไปใช้งาน
+        'borrow_date_th',       // วันที่ยืม ภาษาไทย
+        'return_date_th',       // วันที่คืน ภาษาไทย
     ];
 }
