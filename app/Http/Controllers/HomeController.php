@@ -29,15 +29,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
         $device = Devicemodel::where('deleted', 0)->get(); // นับจำนวนอุปกรณ์ที่ยังไม่ถูกลบ
-        $computer = Devicemodel::where('type_eq', 'Computer')->count();
-        $notebook = Devicemodel::where('type_eq', 'Notebook')->count();
-        $tablet = Devicemodel::where('type_eq', 'Tablet')->count();
-        $projector = Devicemodel::where('type_eq', 'Projector')->count();
-        $printer = Devicemodel::where('type_eq', 'Printer')->count();        
-        $network = Devicemodel::where('type_eq', 'Network')->count();   
-        return view('home',compact('device','computer','notebook','tablet','projector','printer','network'));
+        $count_device = [            
+            'computer' => Devicemodel::where('deleted',0)->where('type_eq', 'Computer')->count(),
+            'notebook' => Devicemodel::where('deleted',0)->where('type_eq', 'Notebook')->count(),
+            'tablet' => Devicemodel::where('deleted',0)->where('type_eq', 'Tablet')->count(),
+            'projector' => Devicemodel::where('deleted',0)->where('type_eq', 'Projector')->count(),
+            'printer' => Devicemodel::where('deleted',0)->where('type_eq', 'Printer')->count(),        
+            'network' => Devicemodel::where('deleted',0)->where('type_eq', 'Network')->count(),   
+        ];
+        // dd($count_device['computer']);
+        return view('home',compact('device','count_device'));
     }
     public function device()
     {
@@ -273,5 +276,9 @@ class HomeController extends Controller
     public function form_borrow_equment()
     {
         return view('page.form_borrow_eq');
+    }
+    public function borrow_equment(Request $request)
+    {
+        dd($request->all());
     }
 }

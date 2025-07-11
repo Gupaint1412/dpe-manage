@@ -52,7 +52,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Notebook</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        {{$notebook}}  เครื่อง
+                        {{$count_device['notebook']}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -105,7 +105,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Projectors</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        {{$projector}}  เครื่อง
+                        {{$count_device['projector']}}  เครื่อง
                       </span>
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
@@ -118,7 +118,7 @@
                         <span class="text-sm text-gray-500 dark:text-gray-400 d-flex align-items-center" style="padding-left: 1rem">Network</span>
                       </div>
                       <span class=" d-flex align-items-center font-medium  gap-1 rounded-full bg-success-50 py-0.5 pl-2 pr-2.5 text-sm  text-success-600 dark:bg-success-500/15 dark:text-success-500" >                        
-                        {{$network}}  เครื่อง
+                        {{$count_device['network']}}  เครื่อง
                       </span>
                     </div>
                   </div>
@@ -130,24 +130,66 @@
             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
               <div class="col-span-12 space-y-6 xl:col-span-12">
                   <div class="grid grid-cols-1 gap-4">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
-                      <table>
-                         <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
-                          </tr>
-                          <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                          </tr>
-                          <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                          </tr>
-                      </table>
+                    <div class="rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+                      <div class="w-full overflow-x-auto">
+                        <table class="min-w-full" id="myTable">
+                          <!-- table header start -->
+                          <thead >
+                            <tr class="border-gray-100 border-y dark:border-gray-800">
+                              <th class="py-3">
+                                <div class="flex items-center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    รายการ
+                                  </p>
+                                </div>
+                              </th>                                            
+                              <th class="py-3">
+                                <div class="flex items-center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    ประเภท
+                                  </p>
+                                </div>
+                              </th>
+                              
+                              <th class="py-3">
+                                <div class="flex items-center col-span-2">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    สถานะ
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3">
+                                <div class="flex items-center col-span-2">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    Action
+                                  </p>
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <!-- table header end -->
+
+                          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                        
+                            <tr>
+                              <td class="py-3">
+                              
+                              </td>                          
+                              
+                              <td class="py-3">
+                               
+                              </td>
+                              <td class="py-3">
+                               
+                              </td>
+                              <td class="py-3">
+                               
+                              </td>                             
+                            </tr> 
+                         
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
               </div>
