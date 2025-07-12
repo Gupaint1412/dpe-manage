@@ -136,7 +136,7 @@
                     <div class="rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
                       <div class="w-full overflow-x-auto">
                         <table class="min-w-full" id="myborrow">
-                          <caption>ข้้อมูลการจองของฉัน</caption>
+                          <caption style="padding-bottom: 1rem">ข้้อมูลการจองของฉัน</caption>
                           <!-- table header start -->
                           <thead >
                             <tr class="border-gray-100 border-y dark:border-gray-800">
@@ -148,28 +148,35 @@
                                 </div>
                               </th>                                            
                               <th class="py-3 text-center">
-                                <div class="flex items-center">
+                                <div class="flex items-center" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     งาน
                                   </p>
                                 </div>
                               </th>
                               <th class="py-3 text-center">
-                                <div class="flex items-center">
+                                <div class="flex items-center" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     อุปกรณ์ที่ยืม
                                   </p>
                                 </div>
                               </th>
                               <th class="py-3 text-center">
-                                <div class="flex items-center col-span-2">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                   วันทำรายการ
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center col-span-2" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     สถานะ
                                   </p>
                                 </div>
                               </th>
                               <th class="py-3 text-center">
-                                <div class="flex items-center col-span-2">
+                                <div class="flex items-center col-span-2" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     Action
                                   </p>
@@ -183,6 +190,11 @@
                           @if($data_borrow->isEmpty())
                              <tr>
                                 <td colspan="4"><h1>ไม่มีประวัติการยืม</h1></td> {{-- แนะนำให้ใส่ <h1> ไว้ใน <td> และใช้ colspan --}}
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
                             </tr>
                           @else
                           @php $i = 1 @endphp
@@ -191,17 +203,22 @@
                                 <td class="py-3 text-center" style="text-align: center">
                                   {{$i++}}
                                 </td>  
-                                <td class="py-3 ">
+                                <td class="py-3 " style="text-align: center">
                                   {{$j->job_of_use}}
                                 </td> 
-                                <td class="py-3">
+                                <td class="py-3" style="text-align: center">
                                   {{$j->type_eq_borrow}}
                                 </td> 
-                                <td class="py-3">
+                                 <td class="py-3" style="text-align: center">
+                                  {{$j->borrow_date_th}}
+                                </td>  
+                                <td class="py-3" style="text-align: center">
                                   {{$j->stage_borrow}}
                                 </td>         
-                                <td class="py-3">
-                                  {{$j->stage_borrow}}
+                                <td class="py-3" style="text-align: center">
+                                  <a href="#" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                  </a>
                                 </td>                                 
                               </tr> 
                             @endforeach

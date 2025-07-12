@@ -8,6 +8,9 @@
   .align-items-center {
     align-items: center;
   }
+  .hover_bg-green:hover{
+    background: green
+  }
 </style>
 @endpush
 
@@ -25,7 +28,10 @@
         <!-- ===== Header End ===== -->
         <!-- ===== Main Content Start ===== -->
         <main>
-          <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">            
+          <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6"> 
+            <div class="mb-6 flex items-center ">
+              <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">ข้อมูลการยืมอุปกรณ์</h5></u>
+            </div>             
             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
               <div class="col-span-12 space-y-6 xl:col-span-12">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
@@ -299,6 +305,112 @@
                 </div>
               </div> 
                      
+            </div>
+             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+              <div class="col-span-12 space-y-6 xl:col-span-12">
+                  <div class="grid grid-cols-1 gap-4">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+                      <div class="w-full overflow-x-auto">
+                        <table class="min-w-full" id="myborrow">
+                          <caption style="padding-bottom: 1rem">ข้อมูลการยืมอุปกรณ์</caption>
+                          <!-- table header start -->
+                          <thead >
+                            <tr class="border-gray-100 border-y dark:border-gray-800">
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    รายการ
+                                  </p>
+                                </div>
+                              </th>                                            
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    งาน
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    อุปกรณ์ที่ยืม
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                   วันทำรายการ
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center col-span-2" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    สถานะ
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center col-span-2" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    Action
+                                  </p>
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <!-- table header end -->
+
+                          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                          @if($data_borrow->isEmpty())
+                             <tr>
+                                <td colspan="4"><h1>ไม่มีประวัติการยืม</h1></td> {{-- แนะนำให้ใส่ <h1> ไว้ใน <td> และใช้ colspan --}}
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                                <td colspan="4" style="display:none"><h1>ไม่มีประวัติการยืม</h1></td>
+                            </tr>
+                          @else
+                          @php $i = 1 @endphp
+                            @foreach($data_borrow as $j)
+                              <tr>
+                                <td class="py-3 text-center" style="text-align: center">
+                                  {{$i++}}
+                                </td>  
+                                <td class="py-3 " style="text-align: center">
+                                  {{$j->job_of_use}}
+                                </td> 
+                                <td class="py-3" style="text-align: center">
+                                  {{$j->type_eq_borrow}}
+                                </td> 
+                                 <td class="py-3" style="text-align: center">
+                                  {{$j->borrow_date_th}}
+                                </td>  
+                                <td class="py-3" style="text-align: center">
+                                  {{$j->stage_borrow}}
+                                </td>         
+                                <td class="py-3" style="text-align:center;">
+                                  <a href="{{route('manage_borrow',$j->id)}}" style="margin-right:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+                                    {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
+                                    <i class="fa-solid fa-gear"></i>
+                                  </a>
+
+                                   <a href="#" style="margin-left:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-success-500 shadow-theme-xs hover_bg-green">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    {{-- <i class="fa-solid fa-gear"></i> --}}
+                                  </a>
+                                </td>                                 
+                              </tr> 
+                            @endforeach
+                          @endif
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
         </main>

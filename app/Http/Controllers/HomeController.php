@@ -225,7 +225,27 @@ class HomeController extends Controller
 
     public function borrow_eq()
     {
-        return view('page.borrow_eq');
+        $data_borrow = BorrowEQ::join('users','borrow_e_q_s.user_borrow_id','=','users.id')
+        ->select('borrow_e_q_s.*','users.prefix as customer_prefix','users.name as customer_name','users.surname as customer_surname','users.affiliation as customer_affiliation',
+        'users.job_group as customer_group','users.job_position as customer_position','users.phone as customer_phone','users.email as customer_email')
+        ->get();
+        // dd($data_borrow);
+        return view('page.borrow_eq',compact('data_borrow'));
+    }
+    public function manage_borrow($id)
+    {
+        $device = Devicemodel::where('status','0')->get();
+        $data = BorrowEQ::find($id)->join('users','borrow_e_q_s.user_borrow_id','=','users.id')
+        ->select('borrow_e_q_s.*','users.prefix as customer_prefix','users.name as customer_name','users.surname as customer_surname','users.affiliation as customer_affiliation',
+        'users.job_group as customer_group','users.job_position as customer_position','users.phone as customer_phone','users.email as customer_email')
+        ->get();
+        // dd($data);
+        return view('page.manage_borrow',compact('data','device'));
+    }
+
+    public function update_manage_borrow(Request $request,$id)
+    {
+        dd($request->all());
     }
 
    public function api_device($id)
@@ -283,7 +303,7 @@ class HomeController extends Controller
     }
     public function borrow_equment(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $userId = Auth::id();
         $borrow_type = $request->input('borrow_type');
         $type_eq_borrow = $request->input('type_eq_borrow');

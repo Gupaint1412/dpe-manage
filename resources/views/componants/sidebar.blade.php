@@ -10,7 +10,7 @@
     class="sidebar-header flex items-center gap-2 pb-7 pt-8"
   >
     <a href="{{route('home')}}" class="d-flex">
-      <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
+      <span class="logo " :class="sidebarToggle ? 'hidden' : ''">
         <div class="d-flex" style="align-items:center;">
           <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
           <h3 class="dark:hidden" style="padding-left:.5rem">DPE DeviceOps</h3>       
@@ -21,7 +21,7 @@
         </div>
       </span>
       
-      <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
+      <img class="logo-icon " :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
     </a>
   </div>
   <!-- SIDEBAR HEADER -->
@@ -120,7 +120,7 @@
                 class="menu-dropdown mt-2 flex flex-col gap-1 pl-9"
               >
                 <li>
-                  <a href="{{route('home')}}" class="menu-dropdown-item group curser_hover {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} dark:text-gray-400">
+                  <a href="{{route('home')}}" class="menu-dropdown-item group curser_hover dark:text-gray-400 {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} {{request()->is('form_borrow_eq') ? 'menu-dropdown-item-active' : ''}} ">
                     หน้าหลัก
                   </a>
                 </li>
@@ -133,7 +133,7 @@
           <!-- Menu Item Calendar -->
           <li>
             <a
-              href="{{route('device')}}" class="menu-item group curser_hover {{ request()->is('device') ? 'menu-item-active' : '' }}  {{request()->is('add_device') ? 'menu-item-active' : ''}}">
+              href="{{route('device')}}" class="menu-item group curser_hover {{ request()->is('device') ? 'menu-item-active' : '' }}  {{request()->is('add_device') ? 'menu-item-active' : ''}} {{ request()->is('edit_device/*') ? 'menu-item-active' : '' }}">
               <i class="fa-solid fa-laptop  {{ request()->is('device') ? 'menu-item-icon-active' : ''}} {{request()->is('add_device') ? 'menu-item-active' : ''}} dark:text-gray-400" style="width: 20px;height:20px"></i>              
               <span
                 class="menu-item-text dark:text-gray-400"
@@ -147,7 +147,7 @@
            <!-- Menu Item Calendar -->
           <li>
             <a
-              href="{{route('borrow_eq')}}" class="menu-item group curser_hover {{ request()->is('borrow_eq') ? 'menu-item-active' : '' }}">
+              href="{{route('borrow_eq')}}" class="menu-item group curser_hover {{ request()->is('borrow_eq') ? 'menu-item-active' : '' }} {{ request()->is('manage_borrow/*') ? 'menu-item-active' : '' }}">
               <i class="fa-regular fa-file-lines {{ request()->is('borrow_eq') ? 'menu-item-icon-active' : ''}}  dark:text-gray-400" style="width: 20px;height:20px"></i>              
               <span
                 class="menu-item-text dark:text-gray-400"
