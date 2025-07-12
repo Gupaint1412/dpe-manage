@@ -94,6 +94,7 @@
                       <h4 style="text-align: center;margin:0" class="text-sm text-gray-500 dark:text-gray-400">ประเภทอุปกรณ์</h4>
                     </div>
                     <div style="padding-top:.25rem"><hr></div>
+                    @if(Auth::user()->role == 1)
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl " style="background: #6A057F">
@@ -105,6 +106,7 @@
                         {{$computer}}  เครื่อง
                       </span>
                     </div>
+                    @endif
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl " style="background: #6A057F">
@@ -116,6 +118,7 @@
                         {{$notebook}}  เครื่อง
                       </span>
                     </div>
+                    @if(Auth::user()->role == 1)
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl" style="background: #6A057F">
@@ -127,6 +130,7 @@
                         {{$tablet}}  เครื่อง
                       </span>
                     </div>
+                    @endif
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl " style="background: #4A47A3">                                              
@@ -177,6 +181,7 @@
                         {{$projector}}  เครื่อง
                       </span>
                     </div>
+                    @if(Auth::user()->role == 1)
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl "style="background: #4A47A3">
@@ -188,6 +193,7 @@
                         {{$printer}}  เครื่อง
                       </span>
                     </div>
+                    @endif
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl " style="background: #8D93ED">
@@ -215,12 +221,13 @@
                         รายการครุภัณฑ์ทั้งหมด
                       </h3>
                     </div>
-
+                     @if(Auth::user()->role == 1)
                     <div class="flex items-center gap-3">                     
                       <a href="{{route('add_device')}}" class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
                         <i class="fa-regular fa-square-plus text-success-500 dark:text-success-500"></i> เพิ่มรายการ
                       </a>
                     </div>
+                    @endif
                   </div>
 
                   <div class="w-full overflow-x-auto">

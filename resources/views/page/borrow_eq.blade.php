@@ -389,7 +389,17 @@
                                   {{$j->borrow_date_th}}
                                 </td>  
                                 <td class="py-3" style="text-align: center">
-                                  {{$j->stage_borrow}}
+                                   @if($j->stage_borrow == 0)
+                                      <p class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-600 dark:bg-warning-500/15 dark:text-warning-500">ส่งแบบฟอร์ม</p>
+                                    @elseif($j->stage_borrow == 1) 
+                                      <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">อนุมัติ</p>
+                                    @elseif($j->stage_borrow == 2)
+                                      <p class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-600 dark:bg-warning-500/15 dark:text-warning-500">อยู่ระหว่างยืม</p>
+                                     @elseif($j->stage_borrow == 3)
+                                      <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">คืนเรียบร้อย</p>
+                                    @elseif($j->stage_borrow == 99)
+                                      <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">ปฏิเสธ</p>
+                                  @endif
                                 </td>         
                                 <td class="py-3" style="text-align:center;">
                                   <a href="{{route('manage_borrow',$j->id)}}" style="margin-right:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">

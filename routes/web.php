@@ -21,6 +21,7 @@ Route::get('/form_borrow_eq',[HomeController::class,'form_borrow_equment'])->nam
 Route::post('/store_borrow_eq',[HomeController::class,'borrow_equment'])->name('store_borrow');
 Route::get('/manage_borrow/{id}',[HomeController::class,'manage_borrow'])->name('manage_borrow');
 Route::put('/update_manage_borrow/{id}',[HomeController::class,'update_manage_borrow'])->name('update_manage_borrow');
+Route::get('/personal_borrow/{id}',[HomeController::class,'personal_borrow'])->name('personal_borrow');
 
 Route::get('/manage_user',[HomeController::class,'manage_user'])->name('manage_user');
 Route::get('/manage_user/{id}',[HomeController::class,'manage_user_by_id'])->name('manage_user_by_id');

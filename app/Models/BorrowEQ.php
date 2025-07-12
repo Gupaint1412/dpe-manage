@@ -10,7 +10,7 @@ class BorrowEQ extends Model
         'user_borrow_id',       // ผู้ยืม
         'user_borrow_accept',   // ผู้อนุญาติให้ยืม
         'eq_id',                // id อุปกรณ์
-        'state_borrow',         // สถานะการยืม
+        'stage_borrow',         // สถานะการยืม
         'borrow_date',          // วันที่ยืม
         'return_date',          // วันที่คืน
         'borrow_type',          // ประเภทการยืม  ประชุม  อบรม  สัมมนา อื่นๆ

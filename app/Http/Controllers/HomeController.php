@@ -245,7 +245,47 @@ class HomeController extends Controller
 
     public function update_manage_borrow(Request $request,$id)
     {
-        dd($request->all());
+        $borrow = BorrowEQ::find($id);
+
+        $stage_borrow = $request->input('stage_borrow');
+        $eq_id_array = $request->input('eq_id');
+        $admin_note = $request->input('admin_note');
+        $user_approve = Auth::id(); 
+        $eq_id_string = is_array($eq_id_array) ? implode(',', $eq_id_array) : null;
+        // dd($stage_borrow,$eq_id_array,$admin_note,$eq_id_string);
+        $updateDataBorrow = [
+            'user_borrow_accept' => $user_approve,
+            'stage_borrow' => $stage_borrow,
+            'eq_id' => $eq_id_string,
+            'admin_note' => $admin_note,
+        ];
+        $borrow->update($updateDataBorrow);
+
+        if (is_array($eq_id_array) && !empty($eq_id_array)) {
+        // วนลูปผ่านแต่ละ ID ใน array เพื่ออัปเดต status ของอุปกรณ์แต่ละชิ้น
+        foreach ($eq_id_array as $deviceId) {
+            // ค้นหาอุปกรณ์ด้วย ID
+            $device = Devicemodel::find($deviceId);
+
+            // ตรวจสอบว่าพบอุปกรณ์หรือไม่ก่อนที่จะอัปเดต
+            if ($device) {
+                $updateDataDevice = [
+                    'status' => 1, // กำหนด status เป็น 1
+                ];
+                $device->update($updateDataDevice);
+            }
+        }
+    }
+    $request->session()->flash('update-success');
+    return redirect()->route('borrow_eq')->with('success', 'Device updated successfully!');
+    }
+
+    public function personal_borrow($id)
+    {
+        $data = BorrowEQ::join('users','borrow_e_q_s.user_borrow_accept','=','users.id')
+        ->select('borrow_e_q_s.*','users.prefix as admin_prefix','users.name as admin_name','users.surname as admin_surname',)
+        ->get();
+        return view('page.personal_borrow',compact('data'));
     }
 
    public function api_device($id)
