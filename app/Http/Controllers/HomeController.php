@@ -235,18 +235,28 @@ class HomeController extends Controller
     public function manage_borrow($id)
     {
         $device = Devicemodel::where('status','0')->get();
-        $data = BorrowEQ::find($id)->join('users','borrow_e_q_s.user_borrow_id','=','users.id')
-        ->select('borrow_e_q_s.*','users.prefix as customer_prefix','users.name as customer_name','users.surname as customer_surname','users.affiliation as customer_affiliation',
-        'users.job_group as customer_group','users.job_position as customer_position','users.phone as customer_phone','users.email as customer_email')
-        ->get();
-        // dd($data);
+        $data = BorrowEQ::where('borrow_e_q_s.id', $id) // เพิ่มเงื่อนไข where เพื่อกรองตาม ID ที่ส่งมา
+                    ->join('users', 'borrow_e_q_s.user_borrow_id', '=', 'users.id')
+                    ->select(
+                        'borrow_e_q_s.*',
+                        'users.prefix as customer_prefix',
+                        'users.name as customer_name',
+                        'users.surname as customer_surname',
+                        'users.affiliation as customer_affiliation',
+                        'users.job_group as customer_group',
+                        'users.job_position as customer_position',
+                        'users.phone as customer_phone',
+                        'users.email as customer_email'
+                    )
+                    ->first(); // ใช้ first() แทน get() เพราะคุณต้องการแค่รายการเดียว
+        // dd($data->id);
         return view('page.manage_borrow',compact('data','device'));
     }
 
     public function update_manage_borrow(Request $request,$id)
     {
         $borrow = BorrowEQ::find($id);
-
+        // dd($borrow);
         $stage_borrow = $request->input('stage_borrow');
         $eq_id_array = $request->input('eq_id');
         $admin_note = $request->input('admin_note');
@@ -282,10 +292,72 @@ class HomeController extends Controller
 
     public function personal_borrow($id)
     {
-        $data = BorrowEQ::join('users','borrow_e_q_s.user_borrow_accept','=','users.id')
-        ->select('borrow_e_q_s.*','users.prefix as admin_prefix','users.name as admin_name','users.surname as admin_surname',)
-        ->get();
+        // ดึงข้อมูล BorrowEQ หลักมาก่อน
+        $borrowData = BorrowEQ::find($id);
+
+        // ตรวจสอบว่าพบข้อมูลหรือไม่
+        if (!$borrowData) {
+            $data = "not found"; // ไม่พบข้อมูล BorrowEQ ด้วย ID ที่ระบุ
+        } else {
+            // เริ่มต้น Query Builder เพื่อดึงข้อมูลหลักของ BorrowEQ พร้อม join กับ user_borrow_id
+            // เราใช้ whereIn() แทน find() เพื่อให้สามารถใช้กับ Query Builder ที่จะ join ได้
+            $query = BorrowEQ::where('borrow_e_q_s.id', $id)
+                            ->join('users', 'borrow_e_q_s.user_borrow_id', '=', 'users.id')
+                            ->select(
+                                'borrow_e_q_s.*',
+                                'users.prefix as customer_prefix', // prefix ของผู้ยืม
+                                'users.name as customer_name',
+                                'users.surname as customer_surname',
+                                'users.affiliation as customer_affiliation',
+                                'users.job_group as customer_group',
+                                'users.job_position as customer_position',
+                                'users.phone as customer_phone',
+                                'users.email as customer_email'
+                            );
+
+            // ตรวจสอบ user_borrow_accept
+            if ($borrowData->user_borrow_accept != null && $borrowData->user_borrow_accept != "") {
+                // ถ้า user_borrow_accept ไม่ว่าง ให้ join กับ Admin ที่อนุมัติ
+                $query->leftJoin('users as admin_users', 'borrow_e_q_s.user_borrow_accept', '=', 'admin_users.id')
+                    ->addSelect(
+                        'admin_users.prefix as admin_prefix',
+                        'admin_users.name as admin_name',
+                        'admin_users.surname as admin_surname'
+                    );
+            }
+
+            // ดึงข้อมูลหลักออกมา
+            $data = $query->first();
+
+            // ตรวจสอบและดึงข้อมูลอุปกรณ์
+            // เราต้องตรวจสอบ $data อีกครั้งเผื่อกรณีที่ $query->first() คืนค่า null (แต่ไม่น่าจะเกิดขึ้นถ้า $borrowData มีค่า)
+            if ($data && !empty($data->eq_id)) {
+                // แยก string ของ eq_id ออกเป็น array ของตัวเลข
+                $eqIds = explode(',', $data->eq_id);
+                $eqIds = array_map('intval', $eqIds); // แปลงแต่ละค่าเป็น integer เพื่อความชัวร์
+
+                // ดึงข้อมูลอุปกรณ์จาก DeviceModel โดยใช้ whereIn
+                $devices = Devicemodel::whereIn('id', $eqIds)->get();
+
+                // เพิ่มข้อมูลอุปกรณ์ลงใน object $data
+                $data->related_devices = $devices;
+            } else {
+                $data->related_devices = collect(); // หากไม่มี eq_id หรือว่างเปล่า ให้เป็น Collection ว่าง
+            }
+        }
+        // dd($data);
         return view('page.personal_borrow',compact('data'));
+    }
+
+    public function update_stage_user(Request $request,$id){
+        // ผู้ใช้ตรวจสอบอุปกรณ์เรียบร้อยและ update stage เป็น 2 อยู่ระหว่างยืม
+        $borrow = BorrowEQ::find($id);
+        $updateDataBorrow = [
+            'stage_borrow' => '2',
+        ];
+        $borrow->update($updateDataBorrow);
+        $request->session()->flash('update-success');
+        return redirect()->route('home')->with('success', 'Device updated successfully!');
     }
 
    public function api_device($id)

@@ -136,7 +136,7 @@
                     <div class="rounded-2xl border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
                       <div class="w-full overflow-x-auto">
                         <table class="min-w-full" id="myborrow">
-                          <caption style="padding-bottom: 1rem">ข้้อมูลการจองของฉัน</caption>
+                          <caption style="padding-bottom: 1rem">ข้อมูลการจองของฉัน</caption>
                           <!-- table header start -->
                           <thead >
                             <tr class="border-gray-100 border-y dark:border-gray-800">

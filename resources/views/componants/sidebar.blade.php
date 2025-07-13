@@ -120,7 +120,7 @@
                 class="menu-dropdown mt-2 flex flex-col gap-1 pl-9"
               >
                 <li>
-                  <a href="{{route('home')}}" class="menu-dropdown-item group curser_hover dark:text-gray-400 {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} {{request()->is('form_borrow_eq') ? 'menu-dropdown-item-active' : ''}} ">
+                  <a href="{{route('home')}}" class="menu-dropdown-item group curser_hover dark:text-gray-400 {{ request()->is('home') ? 'menu-dropdown-item-active' : '' }} {{request()->is('form_borrow_eq') ? 'menu-dropdown-item-active' : ''}} {{request()->is('personal_borrow/*') ? 'menu-dropdown-item-active' : ''}} ">
                     หน้าหลัก
                   </a>
                 </li>
