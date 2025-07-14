@@ -33,15 +33,16 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $device = Devicemodel::where('deleted', 0)->get(); // นับจำนวนอุปกรณ์ที่ยังไม่ถูกลบ
+        $device = Devicemodel::where('deleted', 0)->where('status',0)->get(); // นับจำนวนอุปกรณ์ที่ยังไม่ถูกลบ
+        // dd($device);
         $data_borrow = BorrowEQ::where('user_borrow_id',Auth::id())->get();
         $count_device = [            
-            'computer' => Devicemodel::where('deleted',0)->where('type_eq', 'Computer')->count(),
-            'notebook' => Devicemodel::where('deleted',0)->where('type_eq', 'Notebook')->count(),
-            'tablet' => Devicemodel::where('deleted',0)->where('type_eq', 'Tablet')->count(),
-            'projector' => Devicemodel::where('deleted',0)->where('type_eq', 'Projector')->count(),
-            'printer' => Devicemodel::where('deleted',0)->where('type_eq', 'Printer')->count(),        
-            'network' => Devicemodel::where('deleted',0)->where('type_eq', 'Network')->count(),   
+            'computer' => Devicemodel::where('deleted',0)->where('type_eq', 'Computer')->where('status',0)->get()->count(),
+            'notebook' => Devicemodel::where('deleted',0)->where('type_eq', 'Notebook')->where('status',0)->get()->count(),
+            'tablet' => Devicemodel::where('deleted',0)->where('type_eq', 'Tablet')->where('status',0)->get()->count(),
+            'projector' => Devicemodel::where('deleted',0)->where('type_eq', 'Projector')->where('status',0)->get()->count(),
+            'printer' => Devicemodel::where('deleted',0)->where('type_eq', 'Printer')->where('status',0)->get()->count(),        
+            'network' => Devicemodel::where('deleted',0)->where('type_eq', 'Network')->where('status',0)->get()->count(),   
         ];
         // dd($data_borrow);
         return view('home',compact('device','count_device','data_borrow'));

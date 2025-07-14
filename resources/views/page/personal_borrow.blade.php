@@ -111,7 +111,7 @@
                                     </div>  
                                     <div class=" flex flex-warp -mx-2.5 gap-y-8 " style="margin-top: .5rem">
                                         <div class="w-full px-2.5 py-2.5">
-                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">คำอธิบายเพิ่มเติม(ฝั่งผู้ยืม)</label>
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"><i class="fa-solid fa-user" style="padding-right:.25rem;color:green"></i>คำอธิบายเพิ่มเติม(ฝั่งผู้ยืม)</label>
                                                 <textarea
                                                     readonly                                                                       
                                                     type="text"
@@ -125,9 +125,8 @@
                                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                                 <i class="fa-regular fa-hourglass-half" style="padding-right:.25rem;color:green"></i>วันที่ยืม
                                             </label>
-                                        <input type="text"  value="{{$data->borrow_date_th}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                            <input type="text"  value="{{$data->borrow_date_th}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                                         </div>
-                                        
                                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
                                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                                 <i class="fa-regular fa-hourglass" style="padding-right: .25rem;color:orangered"></i>วันที่คืน
@@ -146,6 +145,8 @@
                                             <input type="text"  value="อยู่ระหว่างยืม" style="background-color: rgb(0, 32, 139);color:white;text-align:center" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                                             @elseif($data->stage_borrow == 3)
                                             <input type="text"  value="คืนเรียบร้อย" style="background-color: rgb(28, 138, 0);color:white;text-align:center" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                             @elseif($data->stage_borrow == 99)
+                                            <input type="text"  value="ปฏิเสธ" style="background-color: rgb(138, 0, 0);color:white;text-align:center" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                                             @endif
                                         </div>    
                                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
@@ -157,8 +158,21 @@
                                             @else
                                             <input type="text"  value="-" style="text-align: center;" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                                             @endif
-                                        </div> 
-                                        <div class="w-full">
+                                        </div>                                                       
+                                    </div>
+                                    <div class=" flex flex-warp -mx-2.5 gap-y-8 " style="margin-top: .5rem">
+                                        <div class="w-full px-2.5 py-2.5">
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"><i class="fa-solid fa-user" style="padding-right:.25rem;color:#6A057F"></i>คำอธิบายเพิ่มเติม(ฝั่งผู้ดูแล)</label>
+                                                <textarea
+                                                    readonly                                                                       
+                                                    type="text"
+                                                    rows="2"
+                                                    class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                                >{{$data->admin_note}}</textarea>
+                                        </div>
+                                    </div>  
+                                    <hr> 
+                                    <div class="w-full">
                                          @if ($data->related_devices->isNotEmpty())
                                             <h3>รายการอุปกรณ์ที่ยืม:</h3>
                                             <ul>
@@ -169,11 +183,8 @@
                                         @else
                                             <p>ไม่มีอุปกรณ์ที่ระบุในการยืมนี้</p>
                                         @endif    
-                                        </div>                
                                     </div>                      
-                                    <hr>
-                                                                                           
-                               
+                                                                                                                                                             
                             </div>
                         </div>
                     </div>
