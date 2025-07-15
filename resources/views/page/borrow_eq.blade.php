@@ -395,7 +395,9 @@
                                       <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">อนุมัติ</p>
                                     @elseif($j->stage_borrow == 2)
                                       <p class="rounded-full bg-brand-500 px-2 py-0.5 text-theme-xs text-white font-medium  dark:bg-brand-500 dark:text-white">อยู่ระหว่างยืม</p>
-                                     @elseif($j->stage_borrow == 3)
+                                    @elseif($j->stage_borrow == 3)
+                                      <p class="rounded-full px-2 py-0.5 text-theme-xs font-medium" style="background-color: rgb(221, 70, 0);color:white;">ขอคืนอุปกรณ์</p>
+                                    @elseif($j->stage_borrow == 4)
                                       <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">คืนเรียบร้อย</p>
                                     @elseif($j->stage_borrow == 99)
                                       <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">ปฏิเสธ</p>
@@ -407,7 +409,7 @@
                                     <i class="fa-solid fa-gear"></i>
                                   </a>
 
-                                   <a href="#" style="margin-left:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-success-500 shadow-theme-xs hover_bg-green">
+                                   <a href="{{route('borrow_eq_stage',$j->id)}}" style="margin-left:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-success-500 shadow-theme-xs hover_bg-green">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     {{-- <i class="fa-solid fa-gear"></i> --}}
                                   </a>
@@ -433,11 +435,12 @@
 
 @push('js')
 <script>
- var table = new DataTable('#myTable', {
+ var table = new DataTable('#myborrow', {
   
     language: {
         url: '{{ asset('datatable/th.json') }}',
     },
+    order: [[ 0, 'desc' ]]
 });
 </script>
 @endpush

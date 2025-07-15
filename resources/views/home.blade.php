@@ -32,7 +32,7 @@
             <div class="mb-6 flex items-center " style="justify-content:space-between">
               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>
               <a href="{{route('form_eq')}}"class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
-                <i class="fa-regular fa-square-plus"></i>จองอุปกรณ์
+                <i class="fa-regular fa-square-plus" style="color: green;"></i>จองอุปกรณ์
               </a>
             </div>
             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
@@ -220,7 +220,9 @@
                                       <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">อนุมัติ</p>
                                     @elseif($j->stage_borrow == 2)
                                       <p class="rounded-full bg-brand-500 px-2 py-0.5 text-theme-xs text-white font-medium  dark:bg-brand-500 dark:text-white">อยู่ระหว่างยืม</p>
-                                     @elseif($j->stage_borrow == 3)
+                                    @elseif($j->stage_borrow == 3)
+                                      <p class="rounded-full  px-2 py-0.5 text-theme-xs font-medium  dark:bg-success-500/15 dark:text-success-500" style="background-color: rgb(221, 70, 0);color:white;">ขอคืนอุปกรณ์</p>
+                                    @elseif($j->stage_borrow == 4)
                                       <p class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">คืนเรียบร้อย</p>
                                     @elseif($j->stage_borrow == 99)
                                       <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">ปฏิเสธ</p>
@@ -256,6 +258,7 @@
     language: {
         url: '{{ asset('datatable/th.json') }}',
     },
+    order: [[ 0, 'desc' ]]
 });
 </script>
 @endpush

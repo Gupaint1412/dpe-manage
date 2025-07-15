@@ -148,7 +148,7 @@
           @if(Auth::user()->role == 1)
           <li>
             <a
-              href="{{route('borrow_eq')}}" class="menu-item group curser_hover {{ request()->is('borrow_eq') ? 'menu-item-active' : '' }} {{ request()->is('manage_borrow/*') ? 'menu-item-active' : '' }}">
+              href="{{route('borrow_eq')}}" class="menu-item group curser_hover {{ request()->is('borrow_eq') ? 'menu-item-active' : '' }} {{ request()->is('manage_borrow/*') ? 'menu-item-active' : '' }} {{ request()->is('borrow_eq_stage/*') ? 'menu-item-active' : '' }}">
               <i class="fa-regular fa-file-lines {{ request()->is('borrow_eq') ? 'menu-item-icon-active' : ''}}  dark:text-gray-400" style="width: 20px;height:20px"></i>              
               <span
                 class="menu-item-text dark:text-gray-400"

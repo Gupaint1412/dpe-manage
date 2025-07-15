@@ -61,7 +61,7 @@
         <main>
             <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">  
                 <div class="mb-6 flex items-center ">
-                    <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">ข้อมูลการจองของฉัน</h5></u>
+                    <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<a class="navigater" href="{{route('borrow_eq')}}"><h5 class="dark:text-white/90">ข้อมูลการยืมอุปกรณ์</h5></a>&nbsp; > &nbsp; <u><h5 class="dark:text-white/90">รายการที่ {{$data->id}}</h5></u>
                 </div>
                 <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
                     <div class="col-span-12 space-y-6 xl:col-span-12">
