@@ -431,6 +431,24 @@ class HomeController extends Controller
         return redirect()->route('home')->with('success', 'Device updated successfully!');
     }
 
+    public function update_stage_user_4(Request $request,$id){
+        // ผู้ใช้ตรวจสอบอุปกรณ์เรียบร้อยและ update stage เป็น 2 อยู่ระหว่างยืม
+        $borrow = BorrowEQ::find($id);       
+        $borrow->update(['stage_borrow' => '4']);
+        $deviceIds = explode(',', $borrow->eq_id);
+         // วนลูปเพื่ออัปเดตสถานะของอุปกรณ์แต่ละตัว
+    foreach ($deviceIds as $deviceId) {
+        $device = Devicemodel::find($deviceId);
+
+        // ตรวจสอบว่าพบอุปกรณ์หรือไม่
+        if ($device) {
+            // อัปเดต status จาก 1 เป็น 2
+            $device->update(['status' => '0']);
+        }
+    }
+        $request->session()->flash('update-success');
+        return redirect()->route('borrow_eq')->with('success', 'Device updated successfully!');
+    }
    public function api_device($id)
     {
         Log::info("Attempting to find device with ID: " . $id); // เพิ่มบรรทัดนี้

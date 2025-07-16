@@ -23,16 +23,16 @@
   .d-none{
     display: none;
   }
+   .hover_bg-green:hover{
+    background: green
+  }
   #myTable thead th {
     text-align: center;
     }
     .text-center{
         text-align: center;
     }
-
-    .hover_green:hover{
-        background-color: #039855;
-    }
+   
     input[readonly] {
         background-color: #e2e8f0; /* ตัวอย่างสีเทาอ่อน (gray-200 ของ Tailwind) */
         cursor: not-allowed; /* เปลี่ยน cursor เพื่อบ่งชี้ว่าแก้ไขไม่ได้ */
@@ -70,11 +70,11 @@
                                 <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
                                     ข้อมูลการยืม
                                 </h3>
-                                @if($data->stage_borrow == 1)
-                                 <form  method="POST" action="{{ route('update_stage_user_2', $data->id) }}"  enctype="multipart/form-data">  
+                                @if($data->stage_borrow == 3)
+                                 <form  method="POST" action="{{ route('update_stage_user_4', $data->id) }}"  enctype="multipart/form-data">  
                                     @csrf  
                                     @method('PUT')                                          
-                                        <button type="submit" class="flex items-center justify-center w-full gap-2 p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
+                                        <button type="submit" class="flex items-center justify-center w-full gap-2 p-3 text-sm font-medium text-white transition-colors rounded-lg bg-success-500 hover_bg-green">
                                             ตรวจสอบอุปกรณ์เรียบร้อย
                                             <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.98481 2.44399C3.11333 1.57147 1.15325 3.46979 1.96543 5.36824L3.82086 9.70527C3.90146 9.89367 3.90146 10.1069 3.82086 10.2953L1.96543 14.6323C1.15326 16.5307 3.11332 18.4291 4.98481 17.5565L16.8184 12.0395C18.5508 11.2319 18.5508 8.76865 16.8184 7.961L4.98481 2.44399ZM3.34453 4.77824C3.0738 4.14543 3.72716 3.51266 4.35099 3.80349L16.1846 9.32051C16.762 9.58973 16.762 10.4108 16.1846 10.68L4.35098 16.197C3.72716 16.4879 3.0738 15.8551 3.34453 15.2223L5.19996 10.8853C5.21944 10.8397 5.23735 10.7937 5.2537 10.7473L9.11784 10.7473C9.53206 10.7473 9.86784 10.4115 9.86784 9.99726C9.86784 9.58304 9.53206 9.24726 9.11784 9.24726L5.25157 9.20287 5.19996 9.11528L3.34453 4.77824Z" fill=""></path>
@@ -82,18 +82,7 @@
                                         </button>
                                  </form >
                                  @endif
-                                @if($data->stage_borrow == 2)
-                                 <form  method="POST" action="{{ route('update_stage_user_3', $data->id) }}"  enctype="multipart/form-data">  
-                                    @csrf  
-                                    @method('PUT')                                          
-                                        <button type="submit" class="flex items-center justify-center w-full gap-2 p-3 text-sm font-medium text-white transition-colors rounded-lg hover_green" style="background-color: #05603a">
-                                            ขอคืนอุปกรณ์
-                                            <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.98481 2.44399C3.11333 1.57147 1.15325 3.46979 1.96543 5.36824L3.82086 9.70527C3.90146 9.89367 3.90146 10.1069 3.82086 10.2953L1.96543 14.6323C1.15326 16.5307 3.11332 18.4291 4.98481 17.5565L16.8184 12.0395C18.5508 11.2319 18.5508 8.76865 16.8184 7.961L4.98481 2.44399ZM3.34453 4.77824C3.0738 4.14543 3.72716 3.51266 4.35099 3.80349L16.1846 9.32051C16.762 9.58973 16.762 10.4108 16.1846 10.68L4.35098 16.197C3.72716 16.4879 3.0738 15.8551 3.34453 15.2223L5.19996 10.8853C5.21944 10.8397 5.23735 10.7937 5.2537 10.7473L9.11784 10.7473C9.53206 10.7473 9.86784 10.4115 9.86784 9.99726C9.86784 9.58304 9.53206 9.24726 9.11784 9.24726L5.25157 9.20287 5.19996 9.11528L3.34453 4.77824Z" fill=""></path>
-                                            </svg>
-                                        </button>
-                                 </form >
-                                @endif
+                               
                             </div>
                             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                                
