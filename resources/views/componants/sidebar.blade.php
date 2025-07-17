@@ -172,6 +172,18 @@
             </a>
           </li>
            @endif  
+          <li>
+            <a
+              href="https://forms.gle/Ct9icJzSgBL5Z9oC8" class="menu-item group curser_hover " target="_blank">            
+            <i class="fa-regular fa-rectangle-list  dark:text-gray-400" style="width: 20px;height:20px"></i>
+              <span
+                class="menu-item-text dark:text-gray-400"
+                :class="sidebarToggle ? 'lg:hidden' : ''"
+              >
+                แบบประเมินความพึงพอใจ
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

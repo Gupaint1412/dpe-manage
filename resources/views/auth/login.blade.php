@@ -161,12 +161,12 @@
 </div>
 
             <div class="flex flex-col items-center max-w-xs">
-              <a href="index.html" class="block mb-4">
+              {{-- <a href="index.html" class="block mb-4">
                 <img src="{{asset('tailadmin/build/src/images/logo/auth-logo.svg')}}" alt="Logo" />
               </a>
               <p class="text-center text-gray-400 dark:text-white/60">
                 Free and Open-Source Tailwind CSS Admin Dashboard Template
-              </p>
+              </p> --}}
             </div>
           </div>
         </div>
