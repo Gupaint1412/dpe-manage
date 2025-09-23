@@ -11,17 +11,18 @@
   >
     <a href="{{route('home')}}" class="d-flex">
       <span class="logo " :class="sidebarToggle ? 'hidden' : ''">
-        <div class="d-flex" style="align-items:center;">
-          <img class="dark:hidden" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px" />
-          <h3 class="dark:hidden" style="padding-left:.5rem">DPE DeviceOps</h3>       
-        </div>
-        <div class="d-flex" style="align-items:center">
-          <img class="hidden dark:block" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
-          <h3 class="hidden dark:block dark:text-gray-400" style="padding-left: .5rem">DPE DeviceOps</h3>       
-        </div>
+        {{-- <div class="d-flex" style="align-items:center;"> --}}
+          <img class="dark:hidden" src="{{asset('Logo/logo12.png')}}" alt="Logo" style="height:35px" />
+          {{-- <img  class="hidden dark:block" src="{{asset('Logo/logo2.png')}}" alt="Logo"  /> --}}
+          {{-- <h3 class="dark:hidden" style="padding-left:.5rem">DPE DeviceOps</h3>        --}}
+        {{-- </div> --}}
+        {{-- <div class="d-flex" style="align-items:center"> --}}
+          <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/logo2.png')}}" alt="Logo" />
+          {{-- <h3 class="hidden dark:block dark:text-gray-400" style="padding-left: .5rem">DPE DeviceOps</h3>        --}}
+        {{-- </div> --}}
       </span>
       
-      <img class="logo-icon " :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/DPE1.png')}}" alt="Logo" style="width: 44px;height:44px"/>
+      <img class="logo-icon " :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{asset('Logo/logo2.png')}}" alt="Logo" style="width: 35px;height:35px"/>
     </a>
   </div>
   <!-- SIDEBAR HEADER -->
@@ -33,7 +34,7 @@
     <nav x-data="{selected: $persist('Dashboard')}">
       <!-- Menu Group -->
       <div>
-        <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
+        <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400" style="padding-top: 1rem;">
           <span
             class="menu-group-title"
             :class="sidebarToggle ? 'lg:hidden' : ''"

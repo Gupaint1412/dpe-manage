@@ -33,8 +33,9 @@
             font-weight: 400;
             font-style: normal;
             }
+            background-color: #f7f7ff;
         }
-         .align-center {
+        .align-center {
         text-align: center;
         }
         .justify-center {
@@ -47,6 +48,7 @@
         .curser_hover:hover{
             background-color: #f2f4f7;
         }
+        
     </style>
     @stack('css')
 </head>

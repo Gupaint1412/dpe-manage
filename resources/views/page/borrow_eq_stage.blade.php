@@ -86,7 +86,15 @@
                             </div>
                             <div class="p-5 space-y-6 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                                
-                                    <h1 style=""><i class="fa-regular fa-file-lines" style="padding-right:.25rem;color:red"></i>รายละเอียดการยืมอุปกรณ์</h1> 
+                                    <h1 style="margin:0"><i class="fa-regular fa-file-lines" style="padding-right:.25rem;color:red"></i>รายละเอียดการยืมอุปกรณ์</h1> 
+                                    <div class="flex flex-warp -mx-2 5 gap-y-8">
+                                        <div class="w-full sm:w-fullmd:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                ผู้ยืม
+                                            </label>
+                                        <input type="text"  value="{{$data->customer_prefix}} {{$data->customer_name}} {{$data->customer_surname}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                        </div>
+                                    </div>
                                     <div class=" flex flex-wrap -mx-2.5 gap-y-8" >
                                         <div class="w-full sm:w-full md:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
                                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">

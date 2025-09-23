@@ -285,8 +285,10 @@
                                     <img src="{{asset('Device_model/HP-245-G9.png')}}" alt="Product" />
                                   @elseif($j->model == "348-G3") 
                                     <img src="{{asset('Device_model/HP-348-G3.png')}}" alt="Product" />                                 
-                                   @elseif($j->model == "Vostro 14 3000 Series") 
+                                  @elseif($j->model == "Vostro 14 3000 Series") 
                                     <img src="{{asset('Device_model/Dell-Vostro14-3000-Series.png')}}" alt="Product" />
+                                  @elseif($j->model == "240-G10") 
+                                    <img src="{{asset('Device_model/HP-240-G10.png')}}" alt="Product" />
                                       @else
                                   {{-- ถ้าไม่มีรูปภาพโมเดลเฉพาะ ให้แสดงรูปภาพแรกจาก path_img ถ้ามี --}}
                                   @if($j->path_img && is_array($j->path_img) && count($j->path_img) > 0)
@@ -386,9 +388,11 @@
                                             <h4 class="mb-1 text-theme-xl font-medium text-gray-800 dark:text-white/90" style="margin: 0;">
                                                     {{$j->brand}} รุ่น {{$j->model}} หมายเลข &nbsp;{{$j->eq_no}}
                                             </h4>
+                                          @if(Auth::user()->role == 1)
                                             <a href="{{route('edit_device',$j->id)}}" style="margin-right: 4rem" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-3 py-2 text-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
                                               <i class="fa-solid fa-pen-to-square"></i>แก้ไขข้อมูล
                                             </a>
+                                          @endif
                                           </div>
                                             <div class="grid grid-cols-12 gap-4 md:gap-6 ">
                                                 <div class="col-span-12 space-y-6 xl:col-span-12">

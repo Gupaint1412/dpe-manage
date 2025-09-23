@@ -11,6 +11,18 @@
   .hover_bg-green:hover{
     background: green
   }
+  .bg-computer {
+    background: #6A057F;
+  }  
+  .bg-projector {
+    background: #4A47A3;
+  }  
+  .bg-network { 
+    background: #8D93ED;
+  }
+  .d-none{
+    display: none;
+  }
 </style>
 @endpush
 
@@ -382,8 +394,12 @@
                                 <td class="py-3 " style="text-align: center">
                                   {{$j->job_of_use}}
                                 </td> 
-                                <td class="py-3" style="text-align: center">
-                                  {{$j->type_eq_borrow}}
+                                <td class="py-3" style="text-align: center">                                  
+                                   @if($j->type_eq_borrow == "โน๊ตบุ๊ค")
+                                    <p class="rounded-full bg-computer px-2 py-0.5 text-theme-xs font-medium text-white/90 dark:bg-computer dark:text-white/90" style="color: #ffffff">
+                                      <span><i class="fa-solid fa-laptop text-white/90"></i></span><span class="lg:d-none"style="padding-left:.25rem">{{$j->type_eq_borrow}}</span>
+                                    </p>
+                                  @endif
                                 </td> 
                                  <td class="py-3" style="text-align: center">
                                   {{$j->borrow_date_th}}
