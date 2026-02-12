@@ -92,7 +92,25 @@
                                             <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                                                 ผู้ยืม
                                             </label>
-                                        <input type="text"  value="{{$data->customer_prefix}} {{$data->customer_name}} {{$data->customer_surname}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                            <input type="text"  value="{{$data->customer_prefix}} {{$data->customer_name}} {{$data->customer_surname}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                        </div>
+                                        <div class="w-full sm:w-fullmd:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                สังกัด
+                                            </label>
+                                            <input type="text"  value="{{$data->customer_affiliation}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                        </div>
+                                        <div class="w-full sm:w-fullmd:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                กลุ่มงาน
+                                            </label>
+                                            <input type="text"  value="{{$data->customer_group}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                        </div>
+                                        <div class="w-full sm:w-fullmd:w-1/2 lg:w-1/4 xl:w-1/4 px-2.5 py-2.5">
+                                            <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                ตำแหน่ง
+                                            </label>
+                                            <input type="text"  value="{{$data->customer_position}}" readonly class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
                                         </div>
                                     </div>
                                     <div class=" flex flex-wrap -mx-2.5 gap-y-8" >
@@ -188,6 +206,7 @@
                                     </div>  
                                     <hr>                                     
                                     <div class="w-full">
+                                        <h3>รายการครุภัณฑ์ที่ถูกใช้งาน</h3>
                                         <table class="min-w-full" id="myTable">
                                             <thead>
                                                 <tr class="border-gray-100 border-y dark:border-gray-800">
@@ -318,6 +337,8 @@
 <script>
     var table = new DataTable('#myTable', {
     responsive: true,
+    lengthChange: false,
+    searching: false,
     language: {
         url: '{{ asset('datatable/th.json') }}',
     },

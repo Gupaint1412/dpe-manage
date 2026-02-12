@@ -44,7 +44,7 @@
             <div class="mb-6 flex items-center ">
               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">ข้อมูลการยืมอุปกรณ์</h5></u>
             </div>             
-            <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
+            {{-- <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
               <div class="col-span-12 space-y-6 xl:col-span-12">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                   <!-- Metric Item Start -->
@@ -69,10 +69,7 @@
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">
-                          {{-- <svg xmlns="http://www.w3.org/2000/svg"class="fill-gray-800 dark:fill-white/90" width="24" height="24"  fill="none" viewBox="0 0 640 512">                          
-                            <path d="M128 32C92.7 32 64 60.7 64 96l0 256 64 0 0-256 384 0 0 256 64 0 0-256c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2C0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8c0-10.6-8.6-19.2-19.2-19.2L19.2 384z"/>
-                          </svg>                         --}}
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">                                             
                           <svg  height="24" width="24" fill="none" class="fill-gray-800 dark:fill-white/90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 363.09 363.09" xml:space="preserve">
                               <g>
                                 <g>
@@ -158,10 +155,7 @@
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">
-                          {{-- <svg xmlns="http://www.w3.org/2000/svg"class="fill-gray-800 dark:fill-white/90" width="24" height="24"  fill="none" viewBox="0 0 640 512">                          
-                            <path d="M128 32C92.7 32 64 60.7 64 96l0 256 64 0 0-256 384 0 0 256 64 0 0-256c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2C0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8c0-10.6-8.6-19.2-19.2-19.2L19.2 384z"/>
-                          </svg>                         --}}
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">                                           
                           <svg  height="24" width="24" fill="none" class="fill-gray-800 dark:fill-white/90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 363.09 363.09" xml:space="preserve">
                               <g>
                                 <g>
@@ -247,10 +241,7 @@
                     </div>
                     <div class="d-flex mt-3" style="justify-content: space-between">
                       <div class="d-flex">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">
-                          {{-- <svg xmlns="http://www.w3.org/2000/svg"class="fill-gray-800 dark:fill-white/90" width="24" height="24"  fill="none" viewBox="0 0 640 512">                          
-                            <path d="M128 32C92.7 32 64 60.7 64 96l0 256 64 0 0-256 384 0 0 256 64 0 0-256c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2C0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8c0-10.6-8.6-19.2-19.2-19.2L19.2 384z"/>
-                          </svg>                         --}}
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">                        
                           <svg  height="24" width="24" fill="none" class="fill-gray-800 dark:fill-white/90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 363.09 363.09" xml:space="preserve">
                               <g>
                                 <g>
@@ -312,12 +303,10 @@
                       </span>
                     </div>
                   </div>
-                  <!-- Metric Item End -->        
-                                   
+                  <!-- Metric Item End -->                                           
                 </div>
               </div> 
-                     
-            </div>
+            </div> --}}
              <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
               <div class="col-span-12 space-y-6 xl:col-span-12">
                   <div class="grid grid-cols-1 gap-4">
@@ -346,6 +335,13 @@
                                 <div class="flex items-center" style="justify-content: center">
                                   <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                     อุปกรณ์ที่ยืม
+                                  </p>
+                                </div>
+                              </th>
+                              <th class="py-3 text-center">
+                                <div class="flex items-center" style="justify-content: center">
+                                  <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                    ID อุปกรณ์ทั้งหมด
                                   </p>
                                 </div>
                               </th>
@@ -401,6 +397,9 @@
                                     </p>
                                   @endif
                                 </td> 
+                                <td class="py-3" style="text-align: center">
+                                  {{$j->eq_id}}
+                                </td>  
                                  <td class="py-3" style="text-align: center">
                                   {{$j->borrow_date_th}}
                                 </td>  
@@ -418,17 +417,19 @@
                                     @elseif($j->stage_borrow == 99)
                                       <p class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-600 dark:bg-error-500/15 dark:text-error-500">ปฏิเสธ</p>
                                   @endif
-                                </td>         
+                                </td>                                 
                                 <td class="py-3" style="text-align:center;">
-                                  <a href="{{route('manage_borrow',$j->id)}}" style="margin-right:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
+                                @if($j->stage_borrow == 0)   
+                                  <a href="{{route('manage_borrow',$j->id)}}"  class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
                                     {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
                                     <i class="fa-solid fa-gear"></i>
                                   </a>
-
-                                   <a href="{{route('borrow_eq_stage',$j->id)}}" style="margin-left:1rem" class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-success-500 shadow-theme-xs hover_bg-green">
+                                @else
+                                   <a href="{{route('borrow_eq_stage',$j->id)}}"  class="px-3 py-2 text-sm font-medium text-white rounded-lg bg-success-500 shadow-theme-xs hover_bg-green">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     {{-- <i class="fa-solid fa-gear"></i> --}}
                                   </a>
+                                @endif
                                 </td>                                 
                               </tr> 
                             @endforeach

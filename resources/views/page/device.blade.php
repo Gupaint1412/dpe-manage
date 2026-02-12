@@ -72,7 +72,7 @@
               <a class="navigater" href="{{route('home')}}"><h5 class=" dark:text-white/90">หน้าหลัก</h5></a>&nbsp; > &nbsp;<u><h5 class="dark:text-white/90">อุปกรณ์ทั้งหมด</h5></u>
             </div>         
             <div class="grid grid-cols-12 gap-4 md:gap-6 mt-6">
-              <div class="col-span-12 space-y-6 xl:col-span-12">
+              {{-- <div class="col-span-12 space-y-6 xl:col-span-12">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                   <!-- Metric Item Start -->
                   <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
@@ -211,14 +211,14 @@
                   <!-- Metric Item End -->        
                                    
                 </div>
-              </div> 
+              </div>  --}}
               <div class="col-span-12 xl:col-span-12">
                 <!-- ====== Table One Start -->
                 <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
                   <div class="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                        รายการครุภัณฑ์ทั้งหมด
+                        รายการครุภัณฑ์ทั้งหมด   {{$sum}}  รายการ
                       </h3>
                     </div>
                      @if(Auth::user()->role == 1)
@@ -238,10 +238,23 @@
                           <th class="py-3">
                             <div class="flex items-center">
                               <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                ลำดับ
+                              </p>
+                            </div>
+                          </th>  
+                          <th class="py-3">
+                            <div class="flex items-center">
+                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
                                 รายการ
                               </p>
                             </div>
-                          </th>                                            
+                          </th>     
+                          <th class="py-3">
+                            <div class="flex items-center">
+                              <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                                ปีที่ซื้อ
+                              </p>
+                          </th>                                       
                           <th class="py-3">
                             <div class="flex items-center">
                               <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
@@ -275,8 +288,16 @@
                       <!-- table header end -->
 
                       <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                      @php $i=1; @endphp
                       @foreach($device as $j)
                         <tr>
+                          <td class="py-3">
+                            <div class="flex items-center">
+                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                {{$i++}}
+                              </p>
+                            </div>
+                          </td>
                           <td class="py-3">
                             <div class="flex items-center">
                               <div class="flex items-center gap-3">
@@ -304,13 +325,19 @@
                                    {{$j->brand}}-{{$j->model}} หมายเลข &nbsp;{{$j->eq_no}}
                                   </p>
                                   <span class="text-gray-500 text-theme-xs dark:text-gray-400">
-                                    เลขครุภัณฑ์: {{$j->eq_number}}                                   
+                                    เลขครุภัณฑ์: {{$j->eq_number}}&nbsp;&nbsp;<b>#ID: {{$j->id}}</b>                                   
                                   </span>
                                 </div>
                               </div>
                             </div>
                           </td>                          
-                          
+                          <td class="py-3">
+                            <div class="flex items-center">
+                              <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                {{$j->service_life}}
+                              </p>
+                            </div>
+                          </td>
                           <td class="py-3">
                             <div class="flex items-center">
                               {{-- <p class="text-gray-500 text-theme-sm dark:text-gray-400">                                 --}}
@@ -570,6 +597,7 @@
     language: {
         url: '{{ asset('datatable/th.json') }}',
     },
+    order: [[0, 'asc']]
 });
 document.addEventListener('DOMContentLoaded', function () {
             var ctx = document.getElementById('myChart').getContext('2d');

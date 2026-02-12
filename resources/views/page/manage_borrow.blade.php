@@ -313,7 +313,7 @@
                                 <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                                     <select class="form-select-2 w-full mt-1" name="eq_id[]" id="categories" multiple="multiple">
                                         @foreach($device as $k)
-                                        <option value="{{$k->id}}">{{$k->type_eq}}{{$k->brand}}{{$k->eq_no}} {{$k->service_life}}</option>       
+                                        <option value="{{$k->id}}">{{$k->type_eq}} {{$k->brand}} {{$k->service_life}} No: {{$k->eq_no}} Serial: {{$k->eq_number}}</option>       
                                         @endforeach                             
                                     </select>
                                 </div>

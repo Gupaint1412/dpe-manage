@@ -56,8 +56,10 @@ class HomeController extends Controller
         $projector = Devicemodel::where('type_eq', 'Projector')->count();
         $printer = Devicemodel::where('type_eq', 'Printer')->count();        
         $network = Devicemodel::where('type_eq', 'Network')->count();   
-        $currentYear = date('Y')+543;       
-        return view('page.device',compact('device', 'currentYear','notebook','computer','tablet','projector','printer','network'));
+        $currentYear = date('Y')+543;  
+        $service_life = Devicemodel::select('service_life')->get();     
+        $sum = count($device);
+        return view('page.device',compact('device', 'currentYear','notebook','computer','tablet','projector','printer','network','sum','service_life'));
     }
 
     public function add_device()
@@ -230,8 +232,9 @@ class HomeController extends Controller
         ->select('borrow_e_q_s.*','users.prefix as customer_prefix','users.name as customer_name','users.surname as customer_surname','users.affiliation as customer_affiliation',
         'users.job_group as customer_group','users.job_position as customer_position','users.phone as customer_phone','users.email as customer_email')
         ->get();
+        $id_devices = BorrowEQ::get('eq_id');
         // dd($data_borrow);
-        return view('page.borrow_eq',compact('data_borrow'));
+        return view('page.borrow_eq',compact('data_borrow','id_devices'));
     }
     public function manage_borrow($id)
     {
